@@ -52,9 +52,10 @@
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
+              <e p="App.g.cs" t="Include" />
               <e p="CSIS_UI_WPF.AssemblyInfo.cs" t="Include" />
               <e p="View" t="Include">
-                <e p="App.g.cs" t="Include" />
+                <e p="FilteredView.g.cs" t="Include" />
                 <e p="MainWindow.g.cs" t="Include" />
               </e>
             </e>

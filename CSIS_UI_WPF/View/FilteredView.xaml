@@ -22,10 +22,5 @@
                 <DataGridTextColumn Header="Using time" Binding="{Binding Path=UsingTime}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBox x:Name="tbAmount" Width="100" Margin="3"></TextBox>
-            <Button Command="{Binding SetMaxAmountToOrderCommand}" CommandParameter="{Binding ElementName=tbAmount, Path=Text}" Margin="3">Set max amount to order</Button>
-        </StackPanel>
     </Grid>
 </Window>
