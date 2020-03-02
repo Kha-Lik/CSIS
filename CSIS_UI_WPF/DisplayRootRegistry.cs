@@ -9,7 +9,7 @@ namespace CSIS_UI_WPF
     {
         Dictionary<Type, Type> vmToWindowMapping = new Dictionary<Type, Type>();
 
-        public void RegisterWindowType<VM, Win>() //where Win : Window, new() where VM : class
+        public void RegisterWindowType<VM, Win>() where Win : Window, new() where VM : class
         {
             var vmType = typeof(VM);
             if (vmType.IsInterface)

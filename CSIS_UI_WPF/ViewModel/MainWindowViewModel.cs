@@ -12,10 +12,7 @@ namespace CSIS_UI_WPF.ViewModel
     {
         private MainFacade _mainFacade = new MainFacade(new XmlDeserializer<Storage>());
         private Cosmetic _selectedCosmetic;
-        
-        private FilterFacade _filter;
 
-        public ObservableCollection<Cosmetic> Filtered => _filter.Filtered;
 
         public Storage Cosmetics => _mainFacade.Storage;
         public Cosmetic SelectedCosmetic
@@ -47,7 +44,7 @@ namespace CSIS_UI_WPF.ViewModel
         {
             get
             {
-                return _addCosmeticCommand ??= new RelayCommand(obj =>
+                return _addCosmeticUsedSlowlyCommand ??= new RelayCommand(obj =>
                 {
                     var cosmetic = new CosmeticUsedSlowly();
                     _mainFacade.AddCosmetic(cosmetic);
