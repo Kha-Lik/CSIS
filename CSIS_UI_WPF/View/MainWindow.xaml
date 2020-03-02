@@ -57,7 +57,8 @@
         </ListBox>
         
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Width="Auto" Command="{Binding AddCommand}">Add new</Button>
+            <Button Width="Auto" Command="{Binding AddCosmeticCommand}">Add new cosmetic</Button>
+            <Button Width="Auto" Command="{Binding AddCosmeticUsedSlowlyCommand}">Add new cosmetic used slowly</Button>
             <Button Command="{Binding OpenFiltered}">Show cosmetics to order</Button>
         </StackPanel>
         

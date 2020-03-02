@@ -58,6 +58,10 @@ namespace CSIS_BusinessLogic
             IsEnding = isEnding;
         }
 
+        public CosmeticUsedSlowly()
+        {
+        }
+
         public object Clone()
         {
             return new CosmeticUsedSlowly(Name, Units, Price, DeliveryTime, ShelfLife, UsingTime, IsEnding);

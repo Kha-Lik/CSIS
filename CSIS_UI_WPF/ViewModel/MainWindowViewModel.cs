@@ -1,4 +1,5 @@
-﻿using CSIS_DataAccess;
+﻿using System.Collections.ObjectModel;
+using CSIS_DataAccess;
 using CSIS_BusinessLogic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -11,6 +12,10 @@ namespace CSIS_UI_WPF.ViewModel
     {
         private MainFacade _mainFacade = new MainFacade(new XmlDeserializer<Storage>());
         private Cosmetic _selectedCosmetic;
+        
+        private FilterFacade _filter;
+
+        public ObservableCollection<Cosmetic> Filtered => _filter.Filtered;
 
         public Storage Cosmetics => _mainFacade.Storage;
         public Cosmetic SelectedCosmetic
@@ -23,14 +28,28 @@ namespace CSIS_UI_WPF.ViewModel
             }
         }
         
-        private RelayCommand _addCommand;
-        public RelayCommand AddCommand
+        private RelayCommand _addCosmeticCommand;
+        public RelayCommand AddCosmeticCommand
         {
             get
             {
-                return _addCommand ??= new RelayCommand(obj =>
+                return _addCosmeticCommand ??= new RelayCommand(obj =>
                 {
                     var cosmetic = new Cosmetic();
+                    _mainFacade.AddCosmetic(cosmetic);
+                    SelectedCosmetic = cosmetic;
+                });
+            }
+        }
+        
+        private RelayCommand _addCosmeticUsedSlowlyCommand;
+        public RelayCommand AddCosmeticUsedSlowlyCommand
+        {
+            get
+            {
+                return _addCosmeticCommand ??= new RelayCommand(obj =>
+                {
+                    var cosmetic = new CosmeticUsedSlowly();
                     _mainFacade.AddCosmetic(cosmetic);
                     SelectedCosmetic = cosmetic;
                 });
