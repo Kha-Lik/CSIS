@@ -1,0 +1,8 @@
+C:\Users\MykolaV\RiderProjects\CSIS\CSIS_BusinessLogic\bin\Debug\netcoreapp3.1\CSIS_BusinessLogic.deps.json
+C:\Users\MykolaV\RiderProjects\CSIS\CSIS_BusinessLogic\bin\Debug\netcoreapp3.1\CSIS_BusinessLogic.dll
+C:\Users\MykolaV\RiderProjects\CSIS\CSIS_BusinessLogic\bin\Debug\netcoreapp3.1\CSIS_BusinessLogic.pdb
+C:\Users\MykolaV\RiderProjects\CSIS\CSIS_BusinessLogic\obj\Debug\netcoreapp3.1\CSIS_BusinessLogic.csprojAssemblyReference.cache
+C:\Users\MykolaV\RiderProjects\CSIS\CSIS_BusinessLogic\obj\Debug\netcoreapp3.1\CSIS_BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\MykolaV\RiderProjects\CSIS\CSIS_BusinessLogic\obj\Debug\netcoreapp3.1\CSIS_BusinessLogic.AssemblyInfo.cs
+C:\Users\MykolaV\RiderProjects\CSIS\CSIS_BusinessLogic\obj\Debug\netcoreapp3.1\CSIS_BusinessLogic.dll
+C:\Users\MykolaV\RiderProjects\CSIS\CSIS_BusinessLogic\obj\Debug\netcoreapp3.1\CSIS_BusinessLogic.pdb

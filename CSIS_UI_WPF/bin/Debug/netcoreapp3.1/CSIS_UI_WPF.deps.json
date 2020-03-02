@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "CSIS_UI_WPF/1.0.0": {
+        "dependencies": {
+          "CSIS_BusinessLogic": "1.0.0",
+          "CSIS_DataAccess": "1.0.0"
+        },
+        "runtime": {
+          "CSIS_UI_WPF.dll": {}
+        }
+      },
+      "CSIS_BusinessLogic/1.0.0": {
+        "runtime": {
+          "CSIS_BusinessLogic.dll": {}
+        }
+      },
+      "CSIS_DataAccess/1.0.0": {
+        "dependencies": {
+          "CSIS_BusinessLogic": "1.0.0"
+        },
+        "runtime": {
+          "CSIS_DataAccess.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CSIS_UI_WPF/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CSIS_BusinessLogic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CSIS_DataAccess/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "CSIS_DataAccess/1.0.0": {
+        "dependencies": {
+          "CSIS_BusinessLogic": "1.0.0"
+        },
+        "runtime": {
+          "CSIS_DataAccess.dll": {}
+        }
+      },
+      "CSIS_BusinessLogic/1.0.0": {
+        "runtime": {
+          "CSIS_BusinessLogic.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CSIS_DataAccess/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CSIS_BusinessLogic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
