@@ -10,12 +10,14 @@
       "netcoreapp3.1"
     ],
     "sources": {
-      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
       "netcoreapp3.1": {
         "projectReferences": {
+          "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BLL\\CSIS_BLL.csproj": {
+            "projectPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BLL\\CSIS_BLL.csproj"
+          },
           "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\CSIS_BusinessLogic.csproj": {
             "projectPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\CSIS_BusinessLogic.csproj"
           },

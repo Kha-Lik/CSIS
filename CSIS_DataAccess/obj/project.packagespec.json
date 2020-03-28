@@ -10,16 +10,11 @@
       "netcoreapp3.1"
     ],
     "sources": {
-      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
       "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "projectReferences": {
-          "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\CSIS_BusinessLogic.csproj": {
-            "projectPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\CSIS_BusinessLogic.csproj"
-          }
-        }
+        "projectReferences": {}
       }
     },
     "warningProperties": {
@@ -30,6 +25,32 @@
   },
   "frameworks": {
     "netcoreapp3.1": {
+      "dependencies": {
+        "AutoMapper": {
+          "target": "Package",
+          "version": "[9.0.0, )"
+        },
+        "Microsoft.EntityFrameworkCore": {
+          "target": "Package",
+          "version": "[5.0.0-preview.2.20120.8, )"
+        },
+        "Microsoft.EntityFrameworkCore.Design": {
+          "target": "Package",
+          "version": "[5.0.0-preview.2.20120.8, )"
+        },
+        "Microsoft.EntityFrameworkCore.Relational": {
+          "target": "Package",
+          "version": "[5.0.0-preview.2.20120.8, )"
+        },
+        "Microsoft.EntityFrameworkCore.SqlServer": {
+          "target": "Package",
+          "version": "[5.0.0-preview.2.20120.8, )"
+        },
+        "Microsoft.EntityFrameworkCore.Tools": {
+          "target": "Package",
+          "version": "[5.0.0-preview.2.20120.8, )"
+        }
+      },
       "imports": [
         "net461",
         "net462",

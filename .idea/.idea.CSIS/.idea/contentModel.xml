@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="C:\Users\MykolaV\.Rider2019.3\config\consoles\db" t="IncludeRecursive" />
+    <e p="C:\Users\MykolaV\.Rider2019.3\config\extensions" t="IncludeRecursive" />
     <e p="C:\Users\MykolaV\.Rider2019.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\MykolaV\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_CSIS.2049650314.00" t="ExcludeRecursive" />
     <e p="C:\Users\MykolaV\RiderProjects\CSIS" t="IncludeFlat">
       <e p="CSIS.sln" t="IncludeFlat" />
-      <e p="CSIS_BusinessLogic" t="IncludeRecursive">
+      <e p="CSIS_BLL" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="Cosmetic.cs" t="Include" />
         <e p="CosmeticUsedSlowly.cs" t="Include" />
-        <e p="CSIS_BusinessLogic.csproj" t="IncludeRecursive" />
+        <e p="CSIS_BLL.csproj" t="IncludeRecursive" />
         <e p="Filter.cs" t="Include" />
         <e p="FilterFacade.cs" t="Include" />
-        <e p="IDataLoader.cs" t="Include" />
-        <e p="IDataSaver.cs" t="Include" />
         <e p="MainFacade.cs" t="Include" />
-        <e p="ModelLoader.cs" t="Include" />
-        <e p="ModelSaver.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
-              <e p="CSIS_BusinessLogic.AssemblyInfo.cs" t="Include" />
+              <e p="CSIS_BLL.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -28,7 +26,10 @@
       </e>
       <e p="CSIS_DataAccess" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="CosmeticEntity.cs" t="Include" />
+        <e p="CosmeticUsedSlowlyEnity.cs" t="Include" />
         <e p="CSIS_DataAccess.csproj" t="IncludeRecursive" />
+        <e p="CSIS_DBContext.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -40,20 +41,19 @@
           <e p="Properties.Designer.cs" t="Include" />
           <e p="Properties.resx" t="Include" />
         </e>
-        <e p="XMLDeserializer.cs" t="Include" />
-        <e p="XmlSerializer.cs" t="Include" />
       </e>
-      <e p="CSIS_UI_WPF" t="IncludeRecursive">
+      <e p="CSIS_UIL" t="IncludeRecursive">
         <e p="App.xaml" t="Include" />
         <e p="App.xaml.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
-        <e p="CSIS_UI_WPF.csproj" t="IncludeRecursive" />
+        <e p="CSIS_UIL.csproj" t="IncludeRecursive" />
         <e p="DisplayRootRegistry.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
               <e p="App.g.cs" t="Include" />
-              <e p="CSIS_UI_WPF.AssemblyInfo.cs" t="Include" />
+              <e p="CSIS_UIL.AssemblyInfo.cs" t="Include" />
+              <e p="MainWindow.g.cs" t="Include" />
               <e p="View" t="Include">
                 <e p="FilteredView.g.cs" t="Include" />
                 <e p="MainWindow.g.cs" t="Include" />

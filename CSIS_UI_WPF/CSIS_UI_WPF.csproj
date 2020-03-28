@@ -7,8 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\CSIS_BLL\CSIS_BLL.csproj" />
       <ProjectReference Include="..\CSIS_BusinessLogic\CSIS_BusinessLogic.csproj" />
       <ProjectReference Include="..\CSIS_DataAccess\CSIS_DataAccess.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ApplicationDefinition Remove="App.xaml" />
     </ItemGroup>
 
 </Project>

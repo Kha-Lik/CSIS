@@ -4,24 +4,22 @@
     "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_DataAccess\\CSIS_DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\CSIS_BusinessLogic.csproj": {
+    "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_DataAccess\\CSIS_DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\CSIS_BusinessLogic.csproj",
-        "projectName": "CSIS_BusinessLogic",
-        "projectPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\CSIS_BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_DataAccess\\CSIS_DataAccess.csproj",
+        "projectName": "CSIS_DataAccess",
+        "projectPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_DataAccess\\CSIS_DataAccess.csproj",
         "packagesPath": "C:\\Users\\MykolaV\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\obj\\",
+        "outputPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MykolaV\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\MykolaV\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,62 +35,32 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0-preview.2.20120.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[5.0.0-preview.2.20120.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.0-preview.2.20120.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0-preview.2.20120.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[5.0.0-preview.2.20120.8, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_DataAccess\\CSIS_DataAccess.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_DataAccess\\CSIS_DataAccess.csproj",
-        "projectName": "CSIS_DataAccess",
-        "projectPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_DataAccess\\CSIS_DataAccess.csproj",
-        "packagesPath": "C:\\Users\\MykolaV\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_DataAccess\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\MykolaV\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netcoreapp3.1"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netcoreapp3.1": {
-            "projectReferences": {
-              "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\CSIS_BusinessLogic.csproj": {
-                "projectPath": "C:\\Users\\MykolaV\\RiderProjects\\CSIS\\CSIS_BusinessLogic\\CSIS_BusinessLogic.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netcoreapp3.1": {
           "imports": [
             "net461",
             "net462",
