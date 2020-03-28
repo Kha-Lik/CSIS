@@ -8,4 +8,8 @@
       <ProjectReference Include="..\CSIS_DataAccess\CSIS_DataAccess.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="SonarAnalyzer.CSharp" Version="8.5.0.15942" />
+    </ItemGroup>
+
 </Project>

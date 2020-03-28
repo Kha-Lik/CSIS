@@ -7,7 +7,7 @@ namespace CSIS_DataAccess
         public int ShelfLife { get; set; }
 
         public int UsingTime { get; set; }
-        
+
         public bool IsEnding { get; set; }
     }
 }

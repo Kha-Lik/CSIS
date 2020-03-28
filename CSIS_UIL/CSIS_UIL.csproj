@@ -13,6 +13,7 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.2.20120.8" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0-preview.2.20120.8" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-preview.1.20120.4" />
+      <PackageReference Include="SonarAnalyzer.CSharp" Version="8.5.0.15942" />
     </ItemGroup>
 
     <ItemGroup>

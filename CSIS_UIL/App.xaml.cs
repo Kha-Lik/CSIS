@@ -1,57 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using Autofac;
+using CSIS_BLL.Mapper;
 using CSIS_DataAccess;
 using CSIS_UI_WPF.View;
 using CSIS_UI_WPF.ViewModel;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using Microsoft.Extensions.DependencyInjection;
-using Autofac;
 
 namespace CSIS_UI_WPF
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        public DisplayRootRegistry displayRootRegistry = new DisplayRootRegistry();
-        MainWindowViewModel mainWindowViewModel;
+        public DisplayRootRegistry DisplayRootRegistry = new DisplayRootRegistry();
+        private MainWindowViewModel mainWindowViewModel;
 
         public App()
         {
-            displayRootRegistry.RegisterWindowType<MainWindowViewModel, MainWindow>();
-            displayRootRegistry.RegisterWindowType<FilteredWindowViewModel, FilteredView>();
+            DisplayRootRegistry.RegisterWindowType<MainWindowViewModel, MainWindow>();
+            DisplayRootRegistry.RegisterWindowType<FilteredWindowViewModel, FilteredView>();
         }
 
         private void BuildUpContainer(ContainerBuilder builder)
         {
             builder.RegisterType<CSIS_DBContext>().InstancePerRequest();
         }
-        
+
         protected override void OnStartup(StartupEventArgs e)
         {
             var services = new ServiceCollection()
-                .AddDbContext<CSIS_DBContext>(x => 
+                .AddDbContext<CSIS_DBContext>(x =>
                     x.UseSqlServer("Server=localhost;Database=CSIS_DB;Trusted_Connection=True;"))
+                .AddScoped(typeof(IRepository<>), typeof(Repository<>))
+                .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork))
+                .BindMapper()
                 .BuildServiceProvider();
-            /*var builder = new ContainerBuilder();
-            BuildUpContainer(builder);*/
-            
-            
+
+
             base.OnStartup(e);
 
             mainWindowViewModel = new MainWindowViewModel();
 
-            
 
-            displayRootRegistry.ShowModalPresentation(mainWindowViewModel);
+            DisplayRootRegistry.ShowModalPresentation(mainWindowViewModel);
 
             Shutdown();
         }

@@ -1,0 +1,34 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using AutoMapper;
+using CSIS_BLL.Interfaces;
+using CSIS_BLL.Mapper;
+using CSIS_DataAccess;
+
+namespace CSIS_BLL
+{
+    public class CosmeticService : ICosmeticService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        
+        public CosmeticService(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
+        public IEnumerable<CosmeticModel> GetAll()
+        {
+            var cosmetics = _unitOfWork.CosmeticRepository.GetAll();
+
+            return _mapper.Map<IEnumerable<CosmeticModel>>(cosmetics);
+        }
+
+        public void Create(CosmeticModel cosmetic)
+        {
+            var entity = _mapper.Map<CosmeticEntity>(cosmetic);
+            _unitOfWork.CosmeticRepository.Create(entity);
+        }
+    }
+}

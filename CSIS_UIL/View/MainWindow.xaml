@@ -7,17 +7,17 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"></Setter>
-            <Setter Property="FontStyle" Value="Italic"></Setter>
-            <Setter Property="Margin" Value="5 0"></Setter>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="Margin" Value="5 0" />
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontSize" Value="14" />
         </Style>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="3"></Setter>
-            <Setter Property="Background" Value="Lavender"></Setter>
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Background" Value="Lavender" />
         </Style>
     </Window.Resources>
     <Grid>
@@ -30,54 +30,54 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <Menu Grid.ColumnSpan="2" Background="Lavender">
             <!--<MenuItem Header="File">
                 <MenuItem Header="Save" Command="{Binding SaveCommand}"></MenuItem>
                 <MenuItem Header="Load" Command="{Binding LoadCommand}"></MenuItem>
             </MenuItem>-->
         </Menu>
-        
+
         <ListBox Grid.Row="1" ItemsSource="{Binding Cosmetics}" SelectedItem="{Binding SelectedCosmetic}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
-                        <TextBlock FontSize="18" Background="Bisque" Text="{Binding Path=Name}"></TextBlock>
+                        <TextBlock FontSize="18" Background="Bisque" Text="{Binding Path=Name}" />
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Price" MinWidth="100"></TextBlock>
-                            <TextBlock Text="Units available" MinWidth="100"></TextBlock>
+                            <TextBlock Text="Price" MinWidth="100" />
+                            <TextBlock Text="Units available" MinWidth="100" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=Price}" MinWidth="100"></TextBlock>
-                            <TextBlock Text="{Binding Path=Units}" MinWidth="100"></TextBlock>
+                            <TextBlock Text="{Binding Path=Price}" MinWidth="100" />
+                            <TextBlock Text="{Binding Path=Units}" MinWidth="100" />
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        
+
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Width="Auto" Command="{Binding AddCosmeticCommand}">Add new cosmetic</Button>
             <Button Width="Auto" Command="{Binding AddCosmeticUsedSlowlyCommand}">Add new cosmetic used slowly</Button>
             <Button Command="{Binding OpenFiltered}">Show cosmetics to order</Button>
         </StackPanel>
-        
+
         <StackPanel Grid.Column="1" Grid.Row="1" DataContext="{Binding SelectedCosmetic}">
-            <TextBlock Text="Selected item" FontSize="16" TextDecorations="Underline"/>
+            <TextBlock Text="Selected item" FontSize="16" TextDecorations="Underline" />
             <TextBlock Text="Name" />
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Units available" />
-            <TextBox Text="{Binding Units, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Text="{Binding Units, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Price" />
-            <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Delivery time" />
-            <TextBox Text="{Binding DeliveryTime, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Text="{Binding DeliveryTime, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Shelf life" />
-            <TextBox Text="{Binding ShelfLife, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Text="{Binding ShelfLife, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Using time" />
-            <TextBox Text="{Binding UsingTime, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Text="{Binding UsingTime, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="IsEnding" />
-            <CheckBox IsChecked="{Binding IsEnding}"></CheckBox>
+            <CheckBox IsChecked="{Binding IsEnding}" />
         </StackPanel>
     </Grid>
 </Window>

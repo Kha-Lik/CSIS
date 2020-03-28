@@ -7,44 +7,38 @@ namespace CSIS_DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CosmeticEntities",
-                columns: table => new
+                "CosmeticEntities",
+                table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    Price = table.Column<int>(nullable: false),
-                    Units = table.Column<int>(nullable: false),
-                    DeliveryTime = table.Column<int>(nullable: false)
+                    Price = table.Column<int>(),
+                    Units = table.Column<int>(),
+                    DeliveryTime = table.Column<int>()
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CosmeticEntities", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_CosmeticEntities", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "CosmeticUsedSlowlyEnities",
-                columns: table => new
+                "CosmeticUsedSlowlyEnities",
+                table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ShelfLife = table.Column<int>(nullable: false),
-                    UsingTime = table.Column<int>(nullable: false),
-                    IsEnding = table.Column<bool>(nullable: false)
+                    ShelfLife = table.Column<int>(),
+                    UsingTime = table.Column<int>(),
+                    IsEnding = table.Column<bool>()
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CosmeticUsedSlowlyEnities", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_CosmeticUsedSlowlyEnities", x => x.Id); });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CosmeticEntities");
+                "CosmeticEntities");
 
             migrationBuilder.DropTable(
-                name: "CosmeticUsedSlowlyEnities");
+                "CosmeticUsedSlowlyEnities");
         }
     }
 }

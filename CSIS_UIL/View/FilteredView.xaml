@@ -8,18 +8,19 @@
         Title="FilteredView" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
-        
-        <DataGrid Grid.Row="0" Margin="5" ItemsSource="{Binding Filtered}" AutoGenerateColumns="False" RowBackground="Bisque" AlternatingRowBackground="Beige">
+
+        <DataGrid Grid.Row="0" Margin="5" ItemsSource="{Binding Filtered}" AutoGenerateColumns="False"
+                  RowBackground="Bisque" AlternatingRowBackground="Beige">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Units available" Binding="{Binding Path=Units}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Delivery time" Binding="{Binding Path=DeliveryTime}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Shelf life" Binding="{Binding Path=ShelfLife}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Using time" Binding="{Binding Path=UsingTime}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
+                <DataGridTextColumn Header="Units available" Binding="{Binding Path=Units}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" />
+                <DataGridTextColumn Header="Delivery time" Binding="{Binding Path=DeliveryTime}" />
+                <DataGridTextColumn Header="Shelf life" Binding="{Binding Path=ShelfLife}" />
+                <DataGridTextColumn Header="Using time" Binding="{Binding Path=UsingTime}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
