@@ -1,9 +1,9 @@
-﻿namespace CSIS_DataAccess
+﻿using CSIS_DataAccess.Entities;
+
+namespace CSIS_DataAccess
 {
-    public class CosmeticUsedSlowlyEnity
+    public class CosmeticUsedSlowlyEnity : BaseEntity
     {
-        public int Id { get; set; }
-        
         public int ShelfLife { get; set; }
 
         public int UsingTime { get; set; }

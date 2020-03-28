@@ -1,6 +1,8 @@
-﻿namespace CSIS_DataAccess
+﻿using CSIS_DataAccess.Entities;
+
+namespace CSIS_DataAccess
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         
     }

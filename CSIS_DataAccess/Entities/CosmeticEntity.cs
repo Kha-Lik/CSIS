@@ -1,9 +1,9 @@
-﻿namespace CSIS_DataAccess
-{
-    public class CosmeticEntity
-    {
-        public int Id { get; set; }
+﻿using CSIS_DataAccess.Entities;
 
+namespace CSIS_DataAccess
+{
+    public class CosmeticEntity : BaseEntity
+    {
         public string Name { get; set; }
 
         public int Price { get; set; }
