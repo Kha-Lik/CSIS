@@ -7,20 +7,20 @@ namespace CSIS_DataAccess
 
         public DbSet<CosmeticUsedSlowlyEnity> CosmeticUsedSlowlyEnities { get; set; }
 
-        public CSIS_DBContext(DbContextOptions<CSIS_DBContext> options) : base(options)
+        public CSIS_DBContext(DbContextOptions<CSIS_DBContext> optionsBuilder) : base(optionsBuilder)
         {
             Database.EnsureCreated();
         }
+        
 
-        public CSIS_DBContext()
+        public CSIS_DBContext() : base()
         {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
-
             optionsBuilder.UseSqlServer("Server=localhost;Database=CSIS_DB;Trusted_Connection=True;");
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }
