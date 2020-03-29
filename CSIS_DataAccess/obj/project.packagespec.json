@@ -30,10 +30,6 @@
           "target": "Package",
           "version": "[9.0.0, )"
         },
-        "Microsoft.EntityFrameworkCore": {
-          "target": "Package",
-          "version": "[5.0.0-preview.2.20120.8, )"
-        },
         "Microsoft.EntityFrameworkCore.Design": {
           "target": "Package",
           "version": "[5.0.0-preview.2.20120.8, )"
@@ -49,6 +45,10 @@
         "Microsoft.EntityFrameworkCore.Tools": {
           "target": "Package",
           "version": "[5.0.0-preview.2.20120.8, )"
+        },
+        "SonarAnalyzer.CSharp": {
+          "target": "Package",
+          "version": "[8.5.0.15942, )"
         }
       },
       "imports": [

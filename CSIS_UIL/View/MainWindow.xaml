@@ -32,10 +32,9 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.ColumnSpan="2" Background="Lavender">
-            <!--<MenuItem Header="File">
+            <MenuItem Header="File">
                 <MenuItem Header="Save" Command="{Binding SaveCommand}"></MenuItem>
-                <MenuItem Header="Load" Command="{Binding LoadCommand}"></MenuItem>
-            </MenuItem>-->
+            </MenuItem>
         </Menu>
 
         <ListBox Grid.Row="1" ItemsSource="{Binding Cosmetics}" SelectedItem="{Binding SelectedCosmetic}">

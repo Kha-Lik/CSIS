@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSIS_DataAccess.Migrations
 {
-    [DbContext(typeof(CSIS_DBContext))]
+    [DbContext(typeof(CsisDbContext))]
     [Migration("20200328135502_InitialCreate")]
     partial class InitialCreate
     {

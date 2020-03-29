@@ -3,14 +3,16 @@ using CSIS_DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSIS_DataAccess.Migrations
 {
     [DbContext(typeof(CsisDbContext))]
-    partial class CSIS_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20200329095714_New")]
+    partial class New
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

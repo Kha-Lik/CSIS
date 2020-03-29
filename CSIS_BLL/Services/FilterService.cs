@@ -42,5 +42,7 @@ namespace CSIS_BLL
             
             return filteredCosmetics.Distinct();
         }
+
+        public void SetMinLeftAmount(int amount) => _minLeftAmount = amount;
     }
 }

@@ -2,15 +2,15 @@
 
 namespace CSIS_DataAccess
 {
-    public class CSIS_DBContext : DbContext
+    public sealed class CsisDbContext : DbContext
     {
-        public CSIS_DBContext(DbContextOptions<CSIS_DBContext> optionsBuilder) : base(optionsBuilder)
+        public CsisDbContext(DbContextOptions optionsBuilder) : base(optionsBuilder)
         {
             Database.EnsureCreated();
         }
 
 
-        public CSIS_DBContext()
+        public CsisDbContext()
         {
         }
 

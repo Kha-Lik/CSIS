@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-using Autofac;
+using CSIS_BLL;
+using CSIS_BLL.Interfaces;
 using CSIS_BLL.Mapper;
 using CSIS_DataAccess;
 using CSIS_UI_WPF.View;
@@ -23,25 +24,25 @@ namespace CSIS_UI_WPF
             DisplayRootRegistry.RegisterWindowType<FilteredWindowViewModel, FilteredView>();
         }
 
-        private void BuildUpContainer(ContainerBuilder builder)
-        {
-            builder.RegisterType<CSIS_DBContext>().InstancePerRequest();
-        }
-
         protected override void OnStartup(StartupEventArgs e)
         {
             var services = new ServiceCollection()
-                .AddDbContext<CSIS_DBContext>(x =>
+                .AddDbContext<CsisDbContext>(x =>
                     x.UseSqlServer("Server=localhost;Database=CSIS_DB;Trusted_Connection=True;"))
                 .AddScoped(typeof(IRepository<>), typeof(Repository<>))
                 .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork))
+                .AddScoped(typeof(IFacade), typeof(Facade))
+                .AddTransient(typeof(ICosmeticService), typeof(CosmeticService))
+                .AddTransient(typeof(ICosmeticUsedSlowlyService), typeof(CosmeticUsedSlowlyService))
+                .AddTransient(typeof(IFilterService), typeof(FilterService))
+                .AddTransient(typeof(ISaverService), typeof(SaverService))
                 .BindMapper()
                 .BuildServiceProvider();
 
 
             base.OnStartup(e);
 
-            mainWindowViewModel = new MainWindowViewModel();
+            mainWindowViewModel = new MainWindowViewModel((IFacade)services.GetService(typeof(IFacade)));
 
 
             DisplayRootRegistry.ShowModalPresentation(mainWindowViewModel);

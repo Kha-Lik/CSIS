@@ -2,9 +2,9 @@
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly CSIS_DBContext _dbContext;
+        private readonly CsisDbContext _dbContext;
 
-        public UnitOfWork(CSIS_DBContext dbContext, IRepository<CosmeticEntity> cosmeticRepository,
+        public UnitOfWork(CsisDbContext dbContext, IRepository<CosmeticEntity> cosmeticRepository,
             IRepository<CosmeticUsedSlowlyEnity> cosmeticUsedSlowlyRepository)
         {
             _dbContext = dbContext;

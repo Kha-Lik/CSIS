@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CSIS_BLL;
+using CSIS_BLL.Interfaces;
 using CSIS_BusinessLogic;
 using CSIS_UI_WPF.Services;
 
@@ -10,19 +11,21 @@ namespace CSIS_UI_WPF.ViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
-        private RelayCommand _addCosmeticCommand;
-
-        private RelayCommand _addCosmeticUsedSlowlyCommand;
-        private readonly MainFacade _mainFacade = new MainFacade();
+        private readonly IFacade _facade;
+        private CosmeticModel _selectedCosmetic;
         
+        private RelayCommand _addCosmeticCommand;
+        private RelayCommand _addCosmeticUsedSlowlyCommand;
         private OpenFilteredWindowCommand _openFiltered;
-        private Cosmetic _selectedCosmetic;
+        private RelayCommand _saveCommand;
+        public MainWindowViewModel(IFacade facade)
+        {
+            _facade = facade;
+        }
 
+        public ObservableCollection<CosmeticModel> Cosmetics => (ObservableCollection<CosmeticModel>) _facade.GetAll();
 
-        public ObservableCollection<Cosmetic> Cosmetics => _mainFacade.Storage.GetCosmetics();
-        public Storage Storage => _mainFacade.Storage;
-
-        public Cosmetic SelectedCosmetic
+        public CosmeticModel SelectedCosmetic
         {
             get => _selectedCosmetic;
             set
@@ -38,8 +41,8 @@ namespace CSIS_UI_WPF.ViewModel
             {
                 return _addCosmeticCommand ??= new RelayCommand(obj =>
                 {
-                    var cosmetic = new Cosmetic();
-                    _mainFacade.AddCosmetic(cosmetic);
+                    var cosmetic = new CosmeticModel();
+                    _facade.CosmeticService.Create(cosmetic);
                     SelectedCosmetic = cosmetic;
                 });
             }
@@ -51,14 +54,16 @@ namespace CSIS_UI_WPF.ViewModel
             {
                 return _addCosmeticUsedSlowlyCommand ??= new RelayCommand(obj =>
                 {
-                    var cosmetic = new CosmeticUsedSlowly();
-                    _mainFacade.AddCosmetic(cosmetic);
+                    var cosmetic = new CosmeticUsedSlowlyModel();
+                    _facade.CosmeticUsedSlowlyService.Create(cosmetic);
                     SelectedCosmetic = cosmetic;
                 });
             }
         }
 
-        public OpenFilteredWindowCommand OpenFiltered => _openFiltered ??= new OpenFilteredWindowCommand(this);
+        public OpenFilteredWindowCommand OpenFiltered => _openFiltered ??= new OpenFilteredWindowCommand(_facade);
+
+        public RelayCommand SaveCommand => _saveCommand ??= new RelayCommand(obj => _facade.SaverService.Save());
 
         public event PropertyChangedEventHandler PropertyChanged;
 

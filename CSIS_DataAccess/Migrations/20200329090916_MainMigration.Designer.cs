@@ -3,14 +3,16 @@ using CSIS_DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CSIS_DataAccess.Migrations
 {
     [DbContext(typeof(CsisDbContext))]
-    partial class CSIS_DBContextModelSnapshot : ModelSnapshot
+    [Migration("20200329090916_MainMigration")]
+    partial class MainMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,22 +51,10 @@ namespace CSIS_DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DeliveryTime")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsEnding")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
                     b.Property<int>("ShelfLife")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Units")
                         .HasColumnType("int");
 
                     b.Property<int>("UsingTime")

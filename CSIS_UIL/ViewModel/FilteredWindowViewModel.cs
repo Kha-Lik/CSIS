@@ -1,23 +1,24 @@
 ﻿using System.Collections.ObjectModel;
 using CSIS_BLL;
+using CSIS_BLL.Interfaces;
 using CSIS_BusinessLogic;
 
 namespace CSIS_UI_WPF.ViewModel
 {
     public class FilteredWindowViewModel
     {
-        private readonly FilterFacade _filter;
-
-        public FilteredWindowViewModel(Storage storage)
+        private readonly IFacade _facade;
+        public FilteredWindowViewModel(IFacade facade)
         {
-            _filter = new FilterFacade(storage);
+            _facade = facade;
         }
 
-        public ObservableCollection<Cosmetic> Filtered => _filter.Filtered;
+        public ObservableCollection<CosmeticModel> Filtered => 
+            (ObservableCollection<CosmeticModel>)_facade.FilterService.GetFiltered();
 
         public void SetMaxAmountToOrder(int amount)
         {
-            _filter.SetMaxAmountToOrder(amount);
+             _facade.FilterService.SetMinLeftAmount(amount);
         }
     }
 }
