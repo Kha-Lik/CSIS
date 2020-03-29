@@ -6,12 +6,12 @@ namespace CSIS_DataAccess.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
+            //has no changes
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            //has no changes
         }
     }
 }

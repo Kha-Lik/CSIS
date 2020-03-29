@@ -7,25 +7,25 @@ namespace CSIS_DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "DeliveryTime",
-                table: "CosmeticUsedSlowlyEnities",
+                "DeliveryTime",
+                "CosmeticUsedSlowlyEnities",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<string>(
-                name: "Name",
-                table: "CosmeticUsedSlowlyEnities",
+                "Name",
+                "CosmeticUsedSlowlyEnities",
                 nullable: true);
 
             migrationBuilder.AddColumn<int>(
-                name: "Price",
-                table: "CosmeticUsedSlowlyEnities",
+                "Price",
+                "CosmeticUsedSlowlyEnities",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<int>(
-                name: "Units",
-                table: "CosmeticUsedSlowlyEnities",
+                "Units",
+                "CosmeticUsedSlowlyEnities",
                 nullable: false,
                 defaultValue: 0);
         }
@@ -33,20 +33,20 @@ namespace CSIS_DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "DeliveryTime",
-                table: "CosmeticUsedSlowlyEnities");
+                "DeliveryTime",
+                "CosmeticUsedSlowlyEnities");
 
             migrationBuilder.DropColumn(
-                name: "Name",
-                table: "CosmeticUsedSlowlyEnities");
+                "Name",
+                "CosmeticUsedSlowlyEnities");
 
             migrationBuilder.DropColumn(
-                name: "Price",
-                table: "CosmeticUsedSlowlyEnities");
+                "Price",
+                "CosmeticUsedSlowlyEnities");
 
             migrationBuilder.DropColumn(
-                name: "Units",
-                table: "CosmeticUsedSlowlyEnities");
+                "Units",
+                "CosmeticUsedSlowlyEnities");
         }
     }
 }

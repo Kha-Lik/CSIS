@@ -2,9 +2,9 @@
 {
     public interface IUnitOfWork
     {
-        IRepository<CosmeticEntity> CosmeticRepository { get; }
+        ICosmeticRepository CosmeticRepository { get; }
 
-        IRepository<CosmeticUsedSlowlyEnity> CosmeticUsedSlowlyRepository { get; }
+        ICosmeticUsedSlowlyRepository CosmeticUsedSlowlyRepository { get; }
 
         void SaveChanges();
     }

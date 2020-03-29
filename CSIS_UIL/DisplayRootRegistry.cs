@@ -70,13 +70,6 @@ namespace CSIS_UI_WPF
             openWindows.Remove(vm);
         }
 
-        /*public async Task ShowModalPresentation(object vm)
-        {
-            var window = CreateWindowInstanceWithVM(vm);
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            await window.Dispatcher.InvokeAsync(() => window.ShowDialog());
-        }*/
-
         public void ShowModalPresentation(object vm)
         {
             var window = CreateWindowInstanceWithVM(vm);

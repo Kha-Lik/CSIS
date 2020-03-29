@@ -33,7 +33,7 @@
 
         <Menu Grid.ColumnSpan="2" Background="Lavender">
             <MenuItem Header="File">
-                <MenuItem Header="Save" Command="{Binding SaveCommand}"></MenuItem>
+                <MenuItem Header="Save" Command="{Binding SaveCommand}" />
             </MenuItem>
         </Menu>
 

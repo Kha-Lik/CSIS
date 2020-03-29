@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using CSIS_BLL;
 using CSIS_BLL.Interfaces;
@@ -12,18 +13,26 @@ namespace CSIS_UI_WPF.ViewModel
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly IFacade _facade;
-        private CosmeticModel _selectedCosmetic;
-        
+
         private RelayCommand _addCosmeticCommand;
         private RelayCommand _addCosmeticUsedSlowlyCommand;
         private OpenFilteredWindowCommand _openFiltered;
         private RelayCommand _saveCommand;
+        private CosmeticModel _selectedCosmetic;
+
         public MainWindowViewModel(IFacade facade)
         {
             _facade = facade;
         }
 
-        public ObservableCollection<CosmeticModel> Cosmetics => (ObservableCollection<CosmeticModel>) _facade.GetAll();
+        public ObservableCollection<CosmeticModel> Cosmetics
+        {
+            get
+            {
+                var cosmetics = _facade.GetAll().ToList();
+                return new ObservableCollection<CosmeticModel>(cosmetics);
+            }
+        }
 
         public CosmeticModel SelectedCosmetic
         {

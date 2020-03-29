@@ -2,11 +2,10 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using CSIS_BusinessLogic;
 
 namespace CSIS_BLL
 {
-    public class CosmeticModel :INotifyPropertyChanged
+    public class CosmeticModel : INotifyPropertyChanged
     {
         private int _delivTime; //Delivery time in days
         private string _name;
@@ -32,7 +31,10 @@ namespace CSIS_BLL
             {
                 if (value > 0) _units = value;
                 else
-                    throw new ArgumentOutOfRangeException("Amount of cosmetics must be greater than zero");
+                {
+                    var msg = "Amount of cosmetics must be greater than zero";
+                    throw new ArgumentOutOfRangeException(msg);
+                }
                 OnPropertyChanged();
             }
         }
@@ -45,7 +47,11 @@ namespace CSIS_BLL
             {
                 if (value > 0) _price = value;
                 else
-                    throw new ArgumentOutOfRangeException("Price must be greater than zero");
+                {
+                    var msg = "Price must be greater than zero";
+                    throw new ArgumentOutOfRangeException(msg);
+                }
+
                 OnPropertyChanged();
             }
         }
@@ -58,7 +64,11 @@ namespace CSIS_BLL
             {
                 if (value > 0) _delivTime = value;
                 else
-                    throw new ArgumentOutOfRangeException("Delivery time must be greater than zero");
+                {
+                    var msg = "Delivery time must be greater than zero";
+                    throw new ArgumentOutOfRangeException(msg);
+                }
+
                 OnPropertyChanged();
             }
         }

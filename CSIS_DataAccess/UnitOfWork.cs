@@ -4,16 +4,16 @@
     {
         private readonly CsisDbContext _dbContext;
 
-        public UnitOfWork(CsisDbContext dbContext, IRepository<CosmeticEntity> cosmeticRepository,
-            IRepository<CosmeticUsedSlowlyEnity> cosmeticUsedSlowlyRepository)
+        public UnitOfWork(CsisDbContext dbContext, ICosmeticRepository cosmeticRepository,
+            ICosmeticUsedSlowlyRepository cosmeticUsedSlowlyRepository)
         {
             _dbContext = dbContext;
             CosmeticRepository = cosmeticRepository;
             CosmeticUsedSlowlyRepository = cosmeticUsedSlowlyRepository;
         }
 
-        public IRepository<CosmeticEntity> CosmeticRepository { get; }
-        public IRepository<CosmeticUsedSlowlyEnity> CosmeticUsedSlowlyRepository { get; }
+        public ICosmeticRepository CosmeticRepository { get; }
+        public ICosmeticUsedSlowlyRepository CosmeticUsedSlowlyRepository { get; }
 
         public void SaveChanges()
         {

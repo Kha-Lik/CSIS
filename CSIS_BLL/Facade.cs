@@ -6,7 +6,8 @@ namespace CSIS_BLL
 {
     public class Facade : IFacade
     {
-        public Facade(ICosmeticService cosmeticService, ICosmeticUsedSlowlyService cosmeticUsedSlowlyService, IFilterService filterService, ISaverService saverService)
+        public Facade(ICosmeticService cosmeticService, ICosmeticUsedSlowlyService cosmeticUsedSlowlyService,
+            IFilterService filterService, ISaverService saverService)
         {
             CosmeticService = cosmeticService;
             CosmeticUsedSlowlyService = cosmeticUsedSlowlyService;
@@ -18,6 +19,7 @@ namespace CSIS_BLL
         public ICosmeticUsedSlowlyService CosmeticUsedSlowlyService { get; }
         public IFilterService FilterService { get; }
         public ISaverService SaverService { get; }
+
         public IEnumerable<CosmeticModel> GetAll()
         {
             var cosmetics = CosmeticService.GetAll().ToList();

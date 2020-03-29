@@ -9,8 +9,8 @@ namespace CSIS_BLL.Mapper
         {
             var mapperConfig = new MapperConfiguration(c => c.AddProfile(new MapperProfile()));
 
-            IMapper mapper = mapperConfig.CreateMapper();
-            
+            var mapper = mapperConfig.CreateMapper();
+
             services.AddSingleton(mapper);
 
             return services;

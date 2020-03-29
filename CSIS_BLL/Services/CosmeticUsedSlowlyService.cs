@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using CSIS_BLL.Interfaces;
 using CSIS_BusinessLogic;
@@ -9,8 +8,8 @@ namespace CSIS_BLL
 {
     public class CosmeticUsedSlowlyService : ICosmeticUsedSlowlyService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CosmeticUsedSlowlyService(IMapper mapper, IUnitOfWork unitOfWork)
         {

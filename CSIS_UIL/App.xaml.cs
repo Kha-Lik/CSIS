@@ -15,8 +15,8 @@ namespace CSIS_UI_WPF
     /// </summary>
     public partial class App : Application
     {
-        public DisplayRootRegistry DisplayRootRegistry = new DisplayRootRegistry();
-        private MainWindowViewModel mainWindowViewModel;
+        public DisplayRootRegistry DisplayRootRegistry { get; } = new DisplayRootRegistry();
+        private MainWindowViewModel _mainWindowViewModel;
 
         public App()
         {
@@ -30,6 +30,8 @@ namespace CSIS_UI_WPF
                 .AddDbContext<CsisDbContext>(x =>
                     x.UseSqlServer("Server=localhost;Database=CSIS_DB;Trusted_Connection=True;"))
                 .AddScoped(typeof(IRepository<>), typeof(Repository<>))
+                .AddScoped(typeof(ICosmeticRepository), typeof(CosmeticRepository))
+                .AddScoped(typeof(ICosmeticUsedSlowlyRepository), typeof(CosmeticUsedSlowlyRepository))
                 .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork))
                 .AddScoped(typeof(IFacade), typeof(Facade))
                 .AddTransient(typeof(ICosmeticService), typeof(CosmeticService))
@@ -42,10 +44,8 @@ namespace CSIS_UI_WPF
 
             base.OnStartup(e);
 
-            mainWindowViewModel = new MainWindowViewModel((IFacade)services.GetService(typeof(IFacade)));
-
-
-            DisplayRootRegistry.ShowModalPresentation(mainWindowViewModel);
+            _mainWindowViewModel = new MainWindowViewModel((IFacade) services.GetService(typeof(IFacade)));
+            DisplayRootRegistry.ShowModalPresentation(_mainWindowViewModel);
 
             Shutdown();
         }

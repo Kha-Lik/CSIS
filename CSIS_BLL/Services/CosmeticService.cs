@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using CSIS_BLL.Interfaces;
-using CSIS_BLL.Mapper;
 using CSIS_DataAccess;
 
 namespace CSIS_BLL
 {
     public class CosmeticService : ICosmeticService
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        
+        private readonly IUnitOfWork _unitOfWork;
+
         public CosmeticService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
