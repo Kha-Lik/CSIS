@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Configuration;
+using System.Windows;
 using CSIS_BLL;
 using CSIS_BLL.Interfaces;
 using CSIS_BLL.Mapper;
@@ -29,7 +30,7 @@ namespace CSIS_UI_WPF
         {
             var services = new ServiceCollection()
                 .AddDbContext<CsisDbContext>(x =>
-                    x.UseSqlServer("Server=localhost;Database=CSIS_DB;Trusted_Connection=True;"))
+                    x.UseSqlServer(ConfigurationManager.ConnectionStrings["Csis"].ConnectionString))
                 .AddScoped(typeof(ICosmeticRepository), typeof(CosmeticRepository))
                 //.AddScoped(typeof(ICosmeticUsedSlowlyRepository), typeof(CosmeticUsedSlowlyRepository))
                 .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork))
