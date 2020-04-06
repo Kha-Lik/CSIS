@@ -4,7 +4,7 @@
     {
         ICosmeticRepository CosmeticRepository { get; }
 
-        ICosmeticUsedSlowlyRepository CosmeticUsedSlowlyRepository { get; }
+        //ICosmeticUsedSlowlyRepository CosmeticUsedSlowlyRepository { get; }
 
         void SaveChanges();
     }

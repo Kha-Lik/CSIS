@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,22 +16,26 @@ namespace CSIS_UI_WPF.ViewModel
         private readonly IFacade _facade;
 
         private RelayCommand _addCosmeticCommand;
-        private RelayCommand _addCosmeticUsedSlowlyCommand;
+        //private RelayCommand _addCosmeticUsedSlowlyCommand;
         private OpenFilteredWindowCommand _openFiltered;
         private RelayCommand _saveCommand;
+        private RelayCommand _saveEditCommand;
         private CosmeticModel _selectedCosmetic;
+        private IEnumerable<CosmeticModel> _cosmetics;
 
         public MainWindowViewModel(IFacade facade)
         {
             _facade = facade;
+            _cosmetics = _facade.CosmeticService.GetAll();
         }
 
-        public ObservableCollection<CosmeticModel> Cosmetics
+        public IEnumerable<CosmeticModel> Cosmetics
         {
-            get
+            get => _cosmetics;
+            set
             {
-                var cosmetics = _facade.GetAll().ToList();
-                return new ObservableCollection<CosmeticModel>(cosmetics);
+                _cosmetics = value;
+                OnPropertyChanged();
             }
         }
 
@@ -52,12 +57,13 @@ namespace CSIS_UI_WPF.ViewModel
                 {
                     var cosmetic = new CosmeticModel();
                     _facade.CosmeticService.Create(cosmetic);
+                    Cosmetics = _facade.CosmeticService.GetAll();
                     SelectedCosmetic = cosmetic;
                 });
             }
         }
 
-        public RelayCommand AddCosmeticUsedSlowlyCommand
+        /*public RelayCommand AddCosmeticUsedSlowlyCommand
         {
             get
             {
@@ -65,14 +71,24 @@ namespace CSIS_UI_WPF.ViewModel
                 {
                     var cosmetic = new CosmeticUsedSlowlyModel();
                     _facade.CosmeticUsedSlowlyService.Create(cosmetic);
+                    Cosmetics = _facade.GetAll();
                     SelectedCosmetic = cosmetic;
                 });
             }
-        }
+        }*/
 
         public OpenFilteredWindowCommand OpenFiltered => _openFiltered ??= new OpenFilteredWindowCommand(_facade);
 
         public RelayCommand SaveCommand => _saveCommand ??= new RelayCommand(obj => _facade.SaverService.Save());
+
+        public RelayCommand SaveEditCommand
+        {
+            get => _saveEditCommand ??= new RelayCommand( o =>
+            {
+                _facade.CosmeticService.Update(SelectedCosmetic);
+                Cosmetics = _facade.CosmeticService.GetAll();
+            });
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

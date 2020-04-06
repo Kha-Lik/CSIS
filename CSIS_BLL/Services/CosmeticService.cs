@@ -28,5 +28,12 @@ namespace CSIS_BLL
             var entity = _mapper.Map<CosmeticEntity>(cosmetic);
             _unitOfWork.CosmeticRepository.Create(entity);
         }
+
+        public void Update(CosmeticModel cosmeticModel)
+        {
+            var entity = _mapper.Map<CosmeticEntity>(cosmeticModel);
+            _unitOfWork.CosmeticRepository.Edit(entity);
+            _unitOfWork.SaveChanges();
+        }
     }
 }

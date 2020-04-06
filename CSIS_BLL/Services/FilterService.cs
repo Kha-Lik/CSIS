@@ -23,7 +23,7 @@ namespace CSIS_BLL
         {
             var filtered = new List<CosmeticModel>();
             filtered.AddRange(GetFilteredCosmetics());
-            filtered.AddRange(GetFilteredUsedSlowly());
+            //filtered.AddRange(GetFilteredUsedSlowly());
             return filtered;
         }
 
@@ -39,7 +39,7 @@ namespace CSIS_BLL
             return cosmetics.Where(c => c.Units <= _minLeftAmount).ToList();
         }
 
-        private IEnumerable<CosmeticUsedSlowlyModel> GetFilteredUsedSlowly()
+        /*private IEnumerable<CosmeticUsedSlowlyModel> GetFilteredUsedSlowly()
         {
             var cosmetics = _mapper.Map<IEnumerable<CosmeticUsedSlowlyModel>>(
                 _unitOfWork.CosmeticUsedSlowlyRepository.GetAll());
@@ -50,6 +50,6 @@ namespace CSIS_BLL
             filteredCosmetics.AddRange(cosmetics.Where(c => c.Units <= _minLeftAmount));
 
             return filteredCosmetics.Distinct();
-        }
+        }*/
     }
 }

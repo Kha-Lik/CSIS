@@ -11,5 +11,11 @@ namespace CSIS_DataAccess
         public int Units { get; set; }
 
         public int DeliveryTime { get; set; }
+
+        public int ShelfLife { get; set; }
+
+        public int UsingTime { get; set; }
+
+        public bool IsEnding { get; set; }
     }
 }

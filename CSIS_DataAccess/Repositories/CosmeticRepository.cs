@@ -16,7 +16,7 @@ namespace CSIS_DataAccess
         
         public IEnumerable<CosmeticEntity> GetAll()
         {
-            return _dbSet.ToList();
+            return _dbSet.AsNoTracking().ToList();
         }
 
         public CosmeticEntity GetById(int id)

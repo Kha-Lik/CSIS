@@ -11,8 +11,10 @@ namespace CSIS_BLL
         private string _name;
         private int _price;
         private int _units;
-
-        [DataMember]
+        private bool _isEnding;
+        private int _shelfLife; //Shelf life in days
+        private int _usingTime; //Using time in days
+        
         public string Name
         {
             get => _name;
@@ -22,8 +24,7 @@ namespace CSIS_BLL
                 OnPropertyChanged();
             }
         }
-
-        [DataMember]
+        
         public int Units
         {
             get => _units;
@@ -38,8 +39,7 @@ namespace CSIS_BLL
                 OnPropertyChanged();
             }
         }
-
-        [DataMember]
+        
         public int Price
         {
             get => _price;
@@ -55,8 +55,7 @@ namespace CSIS_BLL
                 OnPropertyChanged();
             }
         }
-
-        [DataMember]
+        
         public int DeliveryTime
         {
             get => _delivTime;
@@ -73,6 +72,49 @@ namespace CSIS_BLL
             }
         }
 
+        public int ShelfLife
+        {
+            get => _shelfLife;
+            set
+            {
+                if (value > 0) _shelfLife = value;
+                else
+                {
+                    var msg = "Shelf life must be greater than zero";
+                    throw new ArgumentOutOfRangeException(msg);
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
+
+        public int UsingTime
+        {
+            get => _usingTime;
+            set
+            {
+                if (value >= 0 && value <= _shelfLife) _usingTime = value;
+                else
+                {
+                    var msg = "Using time have to be between zero and shelf life";
+                    throw new ArgumentOutOfRangeException(msg);
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
+
+        public bool IsEnding
+        {
+            get => _isEnding;
+            set
+            {
+                _isEnding = value;
+                OnPropertyChanged();
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")

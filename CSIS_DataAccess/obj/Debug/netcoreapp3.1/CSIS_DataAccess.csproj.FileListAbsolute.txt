@@ -10,3 +10,17 @@ C:\Users\MykolaV\RiderProjects\CSIS\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS
 C:\Users\MykolaV\RiderProjects\CSIS\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.AssemblyInfo.cs
 C:\Users\MykolaV\RiderProjects\CSIS\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.dll
 C:\Users\MykolaV\RiderProjects\CSIS\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.pdb
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\bin\Debug\netcoreapp3.1\CSIS_DataAccess.deps.json
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\bin\Debug\netcoreapp3.1\CSIS_DataAccess.runtimeconfig.json
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\bin\Debug\netcoreapp3.1\CSIS_DataAccess.runtimeconfig.dev.json
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\bin\Debug\netcoreapp3.1\CSIS_DataAccess.dll
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\bin\Debug\netcoreapp3.1\CSIS_DataAccess.pdb
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.csprojAssemblyReference.cache
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.Properties.Properties.resources
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.csproj.GenerateResource.cache
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.AssemblyInfoInputs.cache
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.AssemblyInfo.cs
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.dll
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.pdb
+C:\Users\MykolaV\RiderProjects\CSIS2\CSIS_DataAccess\obj\Debug\netcoreapp3.1\CSIS_DataAccess.genruntimeconfig.cache

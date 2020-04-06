@@ -12,4 +12,8 @@
       <PackageReference Include="SonarAnalyzer.CSharp" Version="8.5.0.15942" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Services\CosmeticUsedSlowlyService.cs" />
+    </ItemGroup>
+
 </Project>

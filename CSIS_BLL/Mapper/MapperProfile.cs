@@ -9,7 +9,7 @@ namespace CSIS_BLL.Mapper
         public MapperProfile()
         {
             CreateMap<CosmeticEntity, CosmeticModel>().ReverseMap();
-            CreateMap<CosmeticUsedSlowlyEnity, CosmeticUsedSlowlyModel>().ReverseMap();
+            //CreateMap<CosmeticUsedSlowlyEnity, CosmeticUsedSlowlyModel>().ReverseMap();
         }
     }
 }
