@@ -5,7 +5,6 @@
         public ICosmeticService CosmeticService { get; }
 
         public IFilterService FilterService { get; }
-        public ISaverService SaverService { get; }
 
     }
 }

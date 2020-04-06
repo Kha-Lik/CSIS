@@ -26,18 +26,11 @@
             <ColumnDefinition Width="0.8*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Menu Grid.ColumnSpan="2" Background="Lavender">
-            <MenuItem Header="File">
-                <MenuItem Header="Save" Command="{Binding SaveCommand}" />
-            </MenuItem>
-        </Menu>
-
-        <ListBox Grid.Row="1" ItemsSource="{Binding Cosmetics}" SelectedItem="{Binding SelectedCosmetic}">
+        <ListBox Grid.Row="0" ItemsSource="{Binding Cosmetics}" SelectedItem="{Binding SelectedCosmetic}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
@@ -55,7 +48,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" DataContext="{Binding SelectedCosmetic}">
+        <StackPanel Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedCosmetic}">
             <TextBlock Text="Selected item" FontSize="16" TextDecorations="Underline" />
             <TextBlock Text="Name" />
             <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
@@ -73,11 +66,11 @@
             <CheckBox IsChecked="{Binding IsEnding}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
+        <StackPanel Grid.Row="1">
             <Button Width="Auto" Command="{Binding AddCosmeticCommand}">Add new cosmetic</Button>
         </StackPanel>
 
-        <DockPanel Grid.Row="2" Grid.Column="1">
+        <DockPanel Grid.Row="1" Grid.Column="1">
             <Button Command="{Binding SaveEditCommand}">Save edit</Button>
             <Button Command="{Binding OpenFiltered}" HorizontalAlignment="Right">Show cosmetics to order</Button>
         </DockPanel>

@@ -6,36 +6,36 @@ namespace CSIS_DataAccess
 {
     public class CosmeticRepository : ICosmeticRepository
     {
-        private readonly CsisDbContext _dbSet;
+        private readonly CsisDbContext _dbContext;
 
         public CosmeticRepository(CsisDbContext dbContext)
         {
-            _dbSet = dbContext;
+            _dbContext = dbContext;
         }
 
         public IEnumerable<CosmeticEntity> GetAll()
         {
-            return _dbSet.CosmeticEntities.AsNoTracking().ToList();
+            return _dbContext.CosmeticEntities.AsNoTracking().ToList();
         }
 
         public void Create(CosmeticEntity entity)
         {
-            _dbSet.CosmeticEntities.Add(entity);
+            _dbContext.CosmeticEntities.Add(entity);
         }
 
         public void Delete(CosmeticEntity entity)
         {
-            _dbSet.CosmeticEntities.Remove(entity);
+            _dbContext.CosmeticEntities.Remove(entity);
         }
 
         public void Edit(CosmeticEntity entity)
         {
-            _dbSet.CosmeticEntities.Update(entity);
+            _dbContext.CosmeticEntities.Update(entity);
         }
 
         public void Detach()
         {
-            foreach (var cosmetic in _dbSet.ChangeTracker.Entries().ToArray())
+            foreach (var cosmetic in _dbContext.ChangeTracker.Entries().ToArray())
                 if (cosmetic.Entity != null)
                     cosmetic.State = EntityState.Detached;
         }

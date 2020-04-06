@@ -9,11 +9,6 @@ namespace CSIS_DataAccess
             Database.EnsureCreated();
         }
 
-
-        public CsisDbContext()
-        {
-        }
-
         public DbSet<CosmeticEntity> CosmeticEntities { get; set; }
         
     }

@@ -64,7 +64,6 @@ namespace CSIS_UI_WPF.ViewModel
 
         public OpenFilteredWindowCommand OpenFiltered => _openFiltered ??= new OpenFilteredWindowCommand(_facade);
 
-        public RelayCommand SaveCommand => _saveCommand ??= new RelayCommand(obj => _facade.SaverService.Save());
 
         public RelayCommand SaveEditCommand =>
             _saveEditCommand ??= new RelayCommand(o =>

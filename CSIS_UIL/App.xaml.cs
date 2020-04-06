@@ -32,13 +32,10 @@ namespace CSIS_UI_WPF
                 .AddDbContext<CsisDbContext>(x =>
                     x.UseSqlServer(ConfigurationManager.ConnectionStrings["Csis"].ConnectionString))
                 .AddScoped(typeof(ICosmeticRepository), typeof(CosmeticRepository))
-                //.AddScoped(typeof(ICosmeticUsedSlowlyRepository), typeof(CosmeticUsedSlowlyRepository))
                 .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork))
                 .AddScoped(typeof(IFacade), typeof(Facade))
                 .AddTransient(typeof(ICosmeticService), typeof(CosmeticService))
-                //.AddTransient(typeof(ICosmeticUsedSlowlyService), typeof(CosmeticUsedSlowlyService))
                 .AddTransient(typeof(IFilterService), typeof(FilterService))
-                .AddTransient(typeof(ISaverService), typeof(SaverService))
                 .BindMapper()
                 .BuildServiceProvider();
 
