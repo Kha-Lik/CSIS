@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using CSIS_BLL;
 using CSIS_BLL.Interfaces;
@@ -13,12 +14,13 @@ namespace CSIS_UI_WPF.ViewModel
         private readonly IFacade _facade;
 
         private RelayCommand _addCosmeticCommand;
-        //private RelayCommand _addCosmeticUsedSlowlyCommand;
+
+        private IEnumerable<CosmeticModel> _cosmetics;
+
         private OpenFilteredWindowCommand _openFiltered;
         private RelayCommand _saveCommand;
         private RelayCommand _saveEditCommand;
         private CosmeticModel _selectedCosmetic;
-        private IEnumerable<CosmeticModel> _cosmetics;
 
         public MainWindowViewModel(IFacade facade)
         {
@@ -55,37 +57,21 @@ namespace CSIS_UI_WPF.ViewModel
                     var cosmetic = new CosmeticModel();
                     _facade.CosmeticService.Create(cosmetic);
                     Cosmetics = _facade.CosmeticService.GetAll();
-                    SelectedCosmetic = cosmetic;
+                    SelectedCosmetic = Cosmetics.Last();
                 });
             }
         }
-
-        /*public RelayCommand AddCosmeticUsedSlowlyCommand
-        {
-            get
-            {
-                return _addCosmeticUsedSlowlyCommand ??= new RelayCommand(obj =>
-                {
-                    var cosmetic = new CosmeticUsedSlowlyModel();
-                    _facade.CosmeticUsedSlowlyService.Create(cosmetic);
-                    Cosmetics = _facade.GetAll();
-                    SelectedCosmetic = cosmetic;
-                });
-            }
-        }*/
 
         public OpenFilteredWindowCommand OpenFiltered => _openFiltered ??= new OpenFilteredWindowCommand(_facade);
 
         public RelayCommand SaveCommand => _saveCommand ??= new RelayCommand(obj => _facade.SaverService.Save());
 
-        public RelayCommand SaveEditCommand
-        {
-            get => _saveEditCommand ??= new RelayCommand( o =>
+        public RelayCommand SaveEditCommand =>
+            _saveEditCommand ??= new RelayCommand(o =>
             {
                 _facade.CosmeticService.Update(SelectedCosmetic);
                 Cosmetics = _facade.CosmeticService.GetAll();
-            });
-        }
+            }, o => SelectedCosmetic != null);
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -8,21 +8,15 @@ namespace CSIS_BLL
             IFilterService filterService, ISaverService saverService)
         {
             CosmeticService = cosmeticService;
-            //CosmeticUsedSlowlyService = cosmeticUsedSlowlyService;
             FilterService = filterService;
             SaverService = saverService;
         }
 
         public ICosmeticService CosmeticService { get; }
-        //public ICosmeticUsedSlowlyService CosmeticUsedSlowlyService { get; }
+
         public IFilterService FilterService { get; }
         public ISaverService SaverService { get; }
 
-        /*public IEnumerable<CosmeticModel> GetAll()
-        {
-            var cosmetics = CosmeticService.GetAll().ToList();
-            cosmetics.AddRange(CosmeticUsedSlowlyService.GetAll());
-            return cosmetics;
-        }*/
+
     }
 }

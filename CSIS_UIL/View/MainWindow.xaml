@@ -73,10 +73,9 @@
             <CheckBox IsChecked="{Binding IsEnding}" />
         </StackPanel>
 
-        <DockPanel Grid.Row="2">
+        <StackPanel Grid.Row="2">
             <Button Width="Auto" Command="{Binding AddCosmeticCommand}">Add new cosmetic</Button>
-            <!-- <Button Width="Auto" Command="{Binding AddCosmeticUsedSlowlyCommand}" HorizontalAlignment="Right">Add new cosmetic used slowly</Button> -->
-        </DockPanel>
+        </StackPanel>
 
         <DockPanel Grid.Row="2" Grid.Column="1">
             <Button Command="{Binding SaveEditCommand}">Save edit</Button>

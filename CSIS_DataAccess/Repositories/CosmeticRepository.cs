@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +12,7 @@ namespace CSIS_DataAccess
         {
             _dbSet = dbContext;
         }
-        
+
         public IEnumerable<CosmeticEntity> GetAll()
         {
             return _dbSet.CosmeticEntities.AsNoTracking().ToList();
@@ -36,12 +35,9 @@ namespace CSIS_DataAccess
 
         public void Detach()
         {
-            foreach (var cosmetic in _dbSet.ChangeTracker.Entries().ToArray()) {
-
-                if (cosmetic.Entity != null) {
+            foreach (var cosmetic in _dbSet.ChangeTracker.Entries().ToArray())
+                if (cosmetic.Entity != null)
                     cosmetic.State = EntityState.Detached;
-                }
-            }
         }
     }
 }

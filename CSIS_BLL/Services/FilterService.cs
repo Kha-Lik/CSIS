@@ -20,35 +20,19 @@ namespace CSIS_BLL
 
         public IEnumerable<CosmeticModel> GetFiltered()
         {
-            var filtered = new List<CosmeticModel>();
-            filtered.AddRange(GetFilteredCosmetics());
-            //filtered.AddRange(GetFilteredUsedSlowly());
-            return filtered;
+            var cosmetics = _unitOfWork.CosmeticRepository.GetAll();
+            var cosmeticModels = _mapper.Map<IEnumerable<CosmeticModel>>(cosmetics).ToList();
+            
+            var filtered = cosmeticModels.Where((x => x.IsEnding)).ToList();
+            filtered.AddRange(cosmeticModels.Where(x => x.Units <= _minLeftAmount));
+            filtered.AddRange(cosmeticModels.Where(x => x.DeliveryTime >= (x.ShelfLife - x.UsingTime)));
+            
+            return filtered.Distinct();
         }
 
         public void SetMinLeftAmount(int amount)
         {
             _minLeftAmount = amount;
         }
-
-        private IEnumerable<CosmeticModel> GetFilteredCosmetics()
-        {
-            var cosmetics = _mapper.Map<IEnumerable<CosmeticModel>>(_unitOfWork.CosmeticRepository.GetAll());
-
-            return cosmetics.Where(c => c.Units <= _minLeftAmount).ToList();
-        }
-
-        /*private IEnumerable<CosmeticUsedSlowlyModel> GetFilteredUsedSlowly()
-        {
-            var cosmetics = _mapper.Map<IEnumerable<CosmeticUsedSlowlyModel>>(
-                _unitOfWork.CosmeticUsedSlowlyRepository.GetAll());
-
-            List<CosmeticUsedSlowlyModel> filteredCosmetics;
-            filteredCosmetics = cosmetics.Where(c => c.IsEnding).ToList();
-            filteredCosmetics.AddRange(cosmetics.Where(c => c.ShelfLife <= c.DeliveryTime - c.UsingTime).ToList());
-            filteredCosmetics.AddRange(cosmetics.Where(c => c.Units <= _minLeftAmount));
-
-            return filteredCosmetics.Distinct();
-        }*/
     }
 }

@@ -15,7 +15,6 @@ namespace CSIS_UI_WPF
     /// </summary>
     public partial class App : Application
     {
-        public DisplayRootRegistry DisplayRootRegistry { get; } = new DisplayRootRegistry();
         private MainWindowViewModel _mainWindowViewModel;
 
         public App()
@@ -23,6 +22,8 @@ namespace CSIS_UI_WPF
             DisplayRootRegistry.RegisterWindowType<MainWindowViewModel, MainWindow>();
             DisplayRootRegistry.RegisterWindowType<FilteredWindowViewModel, FilteredView>();
         }
+
+        public DisplayRootRegistry DisplayRootRegistry { get; } = new DisplayRootRegistry();
 
         protected override void OnStartup(StartupEventArgs e)
         {
