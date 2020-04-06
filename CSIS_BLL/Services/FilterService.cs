@@ -2,7 +2,6 @@
 using System.Linq;
 using AutoMapper;
 using CSIS_BLL.Interfaces;
-using CSIS_BusinessLogic;
 using CSIS_DataAccess;
 
 namespace CSIS_BLL

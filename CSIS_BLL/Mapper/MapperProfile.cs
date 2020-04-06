@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CSIS_BusinessLogic;
 using CSIS_DataAccess;
 
 namespace CSIS_BLL.Mapper

@@ -19,11 +19,11 @@ namespace CSIS_DataAccess
 
         //public DbSet<CosmeticUsedSlowlyEnity> CosmeticUsedSlowlyEnities { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=CsisDb;Trusted_Connection=True;");
-            base.OnConfiguring(optionsBuilder);
-        }
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     optionsBuilder.UseSqlServer("Server=localhost;Database=CsisDb;Trusted_Connection=True;");
+        //     base.OnConfiguring(optionsBuilder);
+        // }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -34,6 +34,7 @@ namespace CSIS_BLL
             var entity = _mapper.Map<CosmeticEntity>(cosmeticModel);
             _unitOfWork.CosmeticRepository.Edit(entity);
             _unitOfWork.SaveChanges();
+            _unitOfWork.CosmeticRepository.Detach();
         }
     }
 }

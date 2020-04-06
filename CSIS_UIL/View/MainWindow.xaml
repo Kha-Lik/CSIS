@@ -54,7 +54,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        
+
         <StackPanel Grid.Column="1" Grid.Row="1" DataContext="{Binding SelectedCosmetic}">
             <TextBlock Text="Selected item" FontSize="16" TextDecorations="Underline" />
             <TextBlock Text="Name" />
@@ -72,14 +72,14 @@
             <TextBlock Text="IsEnding" />
             <CheckBox IsChecked="{Binding IsEnding}" />
         </StackPanel>
-        
+
         <DockPanel Grid.Row="2">
             <Button Width="Auto" Command="{Binding AddCosmeticCommand}">Add new cosmetic</Button>
             <!-- <Button Width="Auto" Command="{Binding AddCosmeticUsedSlowlyCommand}" HorizontalAlignment="Right">Add new cosmetic used slowly</Button> -->
         </DockPanel>
-        
+
         <DockPanel Grid.Row="2" Grid.Column="1">
-            <Button Command="{Binding SaveEditCommand}" >Save edit</Button>
+            <Button Command="{Binding SaveEditCommand}">Save edit</Button>
             <Button Command="{Binding OpenFiltered}" HorizontalAlignment="Right">Show cosmetics to order</Button>
         </DockPanel>
 

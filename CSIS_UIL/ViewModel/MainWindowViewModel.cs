@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using CSIS_BLL;
 using CSIS_BLL.Interfaces;
-using CSIS_BusinessLogic;
 using CSIS_UI_WPF.Services;
 
 namespace CSIS_UI_WPF.ViewModel

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace CSIS_BLL.Interfaces
+﻿namespace CSIS_BLL.Interfaces
 {
     public interface IFacade
     {
