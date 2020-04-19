@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>BLL</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SonarAnalyzer.CSharp" Version="8.5.0.15942" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Services\CosmeticUsedSlowlyService.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BLL.Abstract\BLL.Abstract.csproj" />
+      <ProjectReference Include="..\DAL.Abstract\DAL.Abstract.csproj" />
+      <ProjectReference Include="..\DAL.Impl\DAL.Impl.csproj" />
+      <ProjectReference Include="..\Entities\Entities.csproj" />
+      <ProjectReference Include="..\Models\Models.csproj" />
+    </ItemGroup>
+
+</Project>
