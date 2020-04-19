@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace DAL
+namespace DAL.Impl
 {
     public sealed class CsisDbContext : DbContext
     {

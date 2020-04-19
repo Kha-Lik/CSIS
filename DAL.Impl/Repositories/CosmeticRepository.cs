@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DAL.Abstract;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL
+namespace DAL.Impl
 {
     public class CosmeticRepository : ICosmeticRepository
     {

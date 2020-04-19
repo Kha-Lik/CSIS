@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Entities;
 
-namespace DAL
+namespace DAL.Abstract
 {
     public interface ICosmeticRepository
     {

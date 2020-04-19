@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DAL.Migrations
+namespace DAL.Impl.Migrations
 {
     [DbContext(typeof(CsisDbContext))]
     internal class CSIS_DBContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DAL.CosmeticEntity", b =>
+            modelBuilder.Entity("DAL.Impl.CosmeticEntity", b =>
             {
                 b.Property<int>("Id")
                     .ValueGeneratedOnAdd()

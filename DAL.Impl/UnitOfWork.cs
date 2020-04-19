@@ -1,4 +1,6 @@
-﻿namespace DAL
+﻿using DAL.Abstract;
+
+namespace DAL.Impl
 {
     public class UnitOfWork : IUnitOfWork
     {

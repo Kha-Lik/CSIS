@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL.Properties {
+namespace DAL.Impl.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace DAL.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DAL.Properties.Properties", typeof(Properties).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DAL.Impl.Properties.Properties", typeof(Properties).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using DAL.Abstract;
 
-namespace DAL.BS
+namespace DAL.Impl.BS
 {
     public class BinarySerializer : ISerializer
     {

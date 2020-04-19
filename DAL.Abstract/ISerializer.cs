@@ -1,4 +1,4 @@
-﻿namespace DAL
+﻿namespace DAL.Abstract
 {
     public interface ISerializer
     {
