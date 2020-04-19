@@ -1,8 +1,6 @@
-﻿using CSIS_DataAccess.Entities;
-
-namespace CSIS_DataAccess
+﻿namespace Entities
 {
-    public class CosmeticUsedSlowlyEnity : BaseEntity
+    public class CosmeticEntity : BaseEntity
     {
         public string Name { get; set; }
 
