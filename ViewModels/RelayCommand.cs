@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace CSIS_UI_WPF.Services
+namespace ViewModels
 {
     public class RelayCommand : ICommand
     {

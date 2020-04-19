@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace CSIS_UI_WPF
+namespace UIL.View
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml

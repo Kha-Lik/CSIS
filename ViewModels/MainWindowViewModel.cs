@@ -3,11 +3,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using BLL.Abstract;
-using CSIS_UI_WPF.Services;
 using Models;
-using ViewModels;
 
-namespace CSIS_UI_WPF.ViewModel
+namespace ViewModels
 
 {
     public class MainWindowViewModel : INotifyPropertyChanged

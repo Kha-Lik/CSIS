@@ -2,10 +2,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using BLL.Abstract;
-using CSIS_UI_WPF.Services;
 using Models;
 
-namespace CSIS_UI_WPF.ViewModel
+namespace ViewModels
 {
     public class FilteredWindowViewModel : INotifyPropertyChanged
     {

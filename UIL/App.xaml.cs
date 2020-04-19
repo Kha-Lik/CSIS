@@ -2,12 +2,11 @@
 using System.Windows;
 using BLL;
 using BLL.Abstract;
-using CSIS_UI_WPF;
-using CSIS_UI_WPF.View;
-using CSIS_UI_WPF.ViewModel;
 using DAL.Impl;
 using Microsoft.Extensions.DependencyInjection;
 using UIL.Services;
+using UIL.View;
+using ViewModels;
 
 namespace UIL
 {

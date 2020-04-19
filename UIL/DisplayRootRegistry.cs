@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace CSIS_UI_WPF
+namespace UIL
 {
     public class DisplayRootRegistry
     {

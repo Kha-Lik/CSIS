@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using BLL.Abstract;
-using CSIS_UI_WPF.ViewModel;
 using ViewModels;
 
 namespace UIL.Services

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace CSIS_UI_WPF.View
+namespace UIL.View
 {
     public partial class FilteredView : Window
     {
