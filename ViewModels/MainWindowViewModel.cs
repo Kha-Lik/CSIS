@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using BLL;
 using BLL.Abstract;
 using CSIS_UI_WPF.Services;
 using Models;
@@ -14,18 +13,17 @@ namespace CSIS_UI_WPF.ViewModel
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly IFacade _facade;
-        private IEnumerable<CosmeticModel> _cosmetics;
-        private CosmeticModel _selectedCosmetic;
-        
+
         private RelayCommand _addCosmeticCommand;
+        private IEnumerable<CosmeticModel> _cosmetics;
         private RelayCommand _saveEditCommand;
-        private readonly IOpenFilteredCommand _openFiltered;
+        private CosmeticModel _selectedCosmetic;
 
 
         public MainWindowViewModel(IFacade facade, IOpenFilteredCommand openFiltered)
         {
             _facade = facade;
-            _openFiltered = openFiltered;
+            OpenFiltered = openFiltered;
             _cosmetics = _facade.CosmeticService.GetAll();
         }
 
@@ -63,7 +61,7 @@ namespace CSIS_UI_WPF.ViewModel
             }
         }
 
-        public IOpenFilteredCommand OpenFiltered => _openFiltered;
+        public IOpenFilteredCommand OpenFiltered { get; }
 
 
         public RelayCommand SaveEditCommand =>

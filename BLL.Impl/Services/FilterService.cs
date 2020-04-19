@@ -23,11 +23,11 @@ namespace BLL.Services
         {
             var cosmetics = _unitOfWork.CosmeticRepository.GetAll();
             var cosmeticModels = _mapper.Map<IEnumerable<CosmeticModel>>(cosmetics).ToList();
-            
-            var filtered = cosmeticModels.Where((x => x.IsEnding)).ToList();
+
+            var filtered = cosmeticModels.Where(x => x.IsEnding).ToList();
             filtered.AddRange(cosmeticModels.Where(x => x.Units <= _minLeftAmount));
-            filtered.AddRange(cosmeticModels.Where(x => x.DeliveryTime >= (x.ShelfLife - x.UsingTime)));
-            
+            filtered.AddRange(cosmeticModels.Where(x => x.DeliveryTime >= x.ShelfLife - x.UsingTime));
+
             return filtered.Distinct();
         }
 

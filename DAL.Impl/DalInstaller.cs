@@ -14,6 +14,5 @@ namespace DAL.Impl
                 .AddSingleton<IUnitOfWork, UnitOfWork>()
                 .AddSingleton<ICosmeticRepository, CosmeticRepository>();
         }
-        
     }
 }

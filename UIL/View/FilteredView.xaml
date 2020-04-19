@@ -23,9 +23,9 @@
                 <DataGridTextColumn Header="Using time" Binding="{Binding Path=UsingTime}" />
             </DataGrid.Columns>
         </DataGrid>
-        
+
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBox Text="{Binding Amount}" PreviewTextInput="NumberValidationTextBox" MinWidth="60" Margin="5"></TextBox>
+            <TextBox Text="{Binding Amount}" PreviewTextInput="NumberValidationTextBox" MinWidth="60" Margin="5" />
             <Button Command="{Binding ChangeAmountCommand}" Margin="5">Change min amount</Button>
         </StackPanel>
     </Grid>

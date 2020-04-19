@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using DAL.Abstract;
 
@@ -8,10 +7,10 @@ namespace DAL.Impl.BS
     public class BinarySerializer : ISerializer
     {
         private readonly BinaryFormatter _formatter = new BinaryFormatter();
-        
+
         public void Serialize(string path, object obj)
         {
-            using var fs =  new FileStream(path, FileMode.OpenOrCreate);
+            using var fs = new FileStream(path, FileMode.OpenOrCreate);
             _formatter.Serialize(fs, obj);
         }
 

@@ -14,7 +14,5 @@ namespace BLL
         public ICosmeticService CosmeticService { get; }
 
         public IFilterService FilterService { get; }
-
-
     }
 }

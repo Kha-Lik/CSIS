@@ -11,6 +11,5 @@ namespace DAL.Impl
         }
 
         public DbSet<CosmeticEntity> CosmeticEntities { get; set; }
-        
     }
 }
