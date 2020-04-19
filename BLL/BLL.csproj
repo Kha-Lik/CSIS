@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SonarAnalyzer.CSharp" Version="8.5.0.15942" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Services\CosmeticUsedSlowlyService.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DAL\DAL.csproj" />
+    </ItemGroup>
+
+</Project>
