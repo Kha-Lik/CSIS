@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Input;
-using BLL.Interfaces;
+using BLL.Abstract;
 using CSIS_UI_WPF.ViewModel;
-using UIL;
+using ViewModels;
 
-namespace CSIS_UI_WPF.Services
+namespace UIL.Services
 {
-    public class OpenFilteredWindowCommand : ICommand
+    public class OpenFilteredWindowCommand : IOpenFilteredCommand
     {
-        private readonly IFacade _facade;
-
-        public OpenFilteredWindowCommand(IFacade facade)
-        {
-            _facade = facade;
-        }
-
         public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
@@ -27,8 +19,10 @@ namespace CSIS_UI_WPF.Services
         {
             var displayRootRegistry = (Application.Current as App)?.DisplayRootRegistry;
 
-            var filteredWindowViewModel = new FilteredWindowViewModel(_facade);
+            var filteredWindowViewModel = new FilteredWindowViewModel(Facade);
             displayRootRegistry?.ShowModalPresentation(filteredWindowViewModel);
         }
+
+        public IFacade Facade { get; set; }
     }
 }
