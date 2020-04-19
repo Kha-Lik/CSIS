@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
-using DAL;
+using DAL.Impl;
+using Entities;
+using Models;
 
 namespace BLL.Mapper
 {

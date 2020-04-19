@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using BLL.Interfaces;
-using DAL;
+using BLL.Abstract;
+using DAL.Abstract;
+using Models;
 
-namespace BLL
+namespace BLL.Services
 {
     public class FilterService : IFilterService
     {

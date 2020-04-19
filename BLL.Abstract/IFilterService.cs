@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Models;
 
-namespace BLL.Interfaces
+namespace BLL.Abstract
 {
     public interface IFilterService
     {

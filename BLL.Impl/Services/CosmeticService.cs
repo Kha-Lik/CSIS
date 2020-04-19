@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using BLL.Interfaces;
-using DAL;
+using BLL.Abstract;
+using DAL.Abstract;
+using Entities;
+using Models;
 
-namespace BLL
+namespace BLL.Services
 {
     public class CosmeticService : ICosmeticService
     {
@@ -28,6 +30,7 @@ namespace BLL
             var entity = _mapper.Map<CosmeticEntity>(cosmetic);
             _unitOfWork.CosmeticRepository.Create(entity);
             _unitOfWork.SaveChanges();
+            _unitOfWork.CosmeticRepository.Detach();
         }
 
         public void Update(CosmeticModel cosmeticModel)

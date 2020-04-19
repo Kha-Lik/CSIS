@@ -1,4 +1,4 @@
-﻿namespace BLL.Interfaces
+﻿namespace BLL.Abstract
 {
     public interface IFacade
     {

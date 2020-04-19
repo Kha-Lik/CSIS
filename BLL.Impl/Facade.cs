@@ -1,4 +1,4 @@
-﻿using BLL.Interfaces;
+﻿using BLL.Abstract;
 
 namespace BLL
 {
