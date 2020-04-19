@@ -3,8 +3,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using BLL;
-using BLL.Interfaces;
+using BLL.Abstract;
 using CSIS_UI_WPF.Services;
+using Models;
+using ViewModels;
 
 namespace CSIS_UI_WPF.ViewModel
 
@@ -17,12 +19,13 @@ namespace CSIS_UI_WPF.ViewModel
         
         private RelayCommand _addCosmeticCommand;
         private RelayCommand _saveEditCommand;
-        private OpenFilteredWindowCommand _openFiltered;
+        private readonly IOpenFilteredCommand _openFiltered;
 
 
-        public MainWindowViewModel(IFacade facade)
+        public MainWindowViewModel(IFacade facade, IOpenFilteredCommand openFiltered)
         {
             _facade = facade;
+            _openFiltered = openFiltered;
             _cosmetics = _facade.CosmeticService.GetAll();
         }
 
@@ -60,7 +63,7 @@ namespace CSIS_UI_WPF.ViewModel
             }
         }
 
-        public OpenFilteredWindowCommand OpenFiltered => _openFiltered ??= new OpenFilteredWindowCommand(_facade);
+        public IOpenFilteredCommand OpenFiltered => _openFiltered;
 
 
         public RelayCommand SaveEditCommand =>

@@ -2,14 +2,18 @@
 using System.Configuration;
 using System.Windows;
 using BLL;
-using BLL.Interfaces;
+using BLL.Abstract;
 using BLL.Mapper;
+using BLL.Services;
 using CSIS_UI_WPF;
+using CSIS_UI_WPF.Services;
 using CSIS_UI_WPF.View;
 using CSIS_UI_WPF.ViewModel;
-using DAL;
+using DAL.Abstract;
+using DAL.Impl;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using UIL.Services;
 
 namespace UIL
 {
@@ -33,21 +37,16 @@ namespace UIL
 
         private void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddDbContext<CsisDbContext>(x =>
-                    x.UseSqlServer(ConfigurationManager.ConnectionStrings["Csis"].ConnectionString))
-                .AddScoped(typeof(ICosmeticRepository), typeof(CosmeticRepository))
-                .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork))
-                .AddScoped(typeof(IFacade), typeof(Facade))
-                .AddTransient(typeof(ICosmeticService), typeof(CosmeticService))
-                .AddTransient(typeof(IFilterService), typeof(FilterService))
-                .BindMapper();
+            serviceCollection.InstallDal();
+            serviceCollection.InstallBll();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            var mainWindowViewModel = new MainWindowViewModel((IFacade) ServiceProvider.GetService(typeof(IFacade)));
+            var command = new OpenFilteredWindowCommand(){Facade = ServiceProvider.GetService<IFacade>()};
+            var mainWindowViewModel = new MainWindowViewModel((IFacade) ServiceProvider.GetService(typeof(IFacade)), command);
             DisplayRootRegistry.ShowModalPresentation(mainWindowViewModel);
 
             Shutdown();

@@ -2,8 +2,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using BLL;
-using BLL.Interfaces;
+using BLL.Abstract;
 using CSIS_UI_WPF.Services;
+using Models;
 
 namespace CSIS_UI_WPF.ViewModel
 {
