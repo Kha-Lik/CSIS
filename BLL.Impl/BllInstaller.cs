@@ -1,6 +1,8 @@
 ﻿using BLL.Abstract;
 using BLL.Mapper;
 using BLL.Services;
+using DAL.Abstract;
+using DAL.Impl.BS;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BLL
@@ -12,6 +14,7 @@ namespace BLL
             serviceCollection.AddSingleton<ICosmeticService, CosmeticService>()
                 .AddSingleton<IFilterService, FilterService>()
                 .AddSingleton<IFacade, Facade>()
+                .AddSingleton<ISerializer, BinarySerializer>()
                 .BindMapper();
         }
     }

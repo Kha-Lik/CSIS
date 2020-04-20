@@ -11,11 +11,13 @@ namespace BLL.Services
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ISerializer _serializer;
 
-        public CosmeticService(IUnitOfWork unitOfWork, IMapper mapper)
+        public CosmeticService(IUnitOfWork unitOfWork, IMapper mapper, ISerializer serializer)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _serializer = serializer;
         }
 
         public IEnumerable<CosmeticModel> GetAll()
@@ -39,6 +41,17 @@ namespace BLL.Services
             _unitOfWork.CosmeticRepository.Edit(entity);
             _unitOfWork.SaveChanges();
             _unitOfWork.CosmeticRepository.Detach();
+        }
+
+        public void Serialize(ICollection<CosmeticModel> cosmeticModels, string path)
+        {
+            _serializer.Serialize(path, cosmeticModels);
+        }
+
+        public ICollection<CosmeticModel> Deserialize(string path)
+        {
+            var cosmetics = _serializer.Deserialize(path) as ICollection<CosmeticModel>;
+            return cosmetics;
         }
     }
 }

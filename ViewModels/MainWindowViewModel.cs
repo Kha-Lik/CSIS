@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using BLL.Abstract;
@@ -16,6 +18,9 @@ namespace ViewModels
         private IEnumerable<CosmeticModel> _cosmetics;
         private RelayCommand _saveEditCommand;
         private CosmeticModel _selectedCosmetic;
+        private RelayCommand _serializeCommand;
+        private RelayCommand _deserializeCommand;
+        private readonly string _path;
 
 
         public MainWindowViewModel(IFacade facade, IOpenFilteredCommand openFiltered)
@@ -23,11 +28,12 @@ namespace ViewModels
             _facade = facade;
             OpenFiltered = openFiltered;
             _cosmetics = _facade.CosmeticService.GetAll();
+            _path = ConfigurationManager.AppSettings.Get("SerializationPath");
         }
 
-        public IEnumerable<CosmeticModel> Cosmetics
+        public ICollection<CosmeticModel> Cosmetics
         {
-            get => _cosmetics;
+            get => _cosmetics as ICollection<CosmeticModel>;
             set
             {
                 _cosmetics = value;
@@ -53,11 +59,22 @@ namespace ViewModels
                 {
                     var cosmetic = new CosmeticModel();
                     _facade.CosmeticService.Create(cosmetic);
-                    Cosmetics = _facade.CosmeticService.GetAll();
+                    Cosmetics = _facade.CosmeticService.GetAll() as ICollection<CosmeticModel>;
                     SelectedCosmetic = Cosmetics.Last();
                 });
             }
         }
+
+        public RelayCommand SerializeCommand => _serializeCommand ??= new RelayCommand(o =>
+        {
+            _facade.CosmeticService.Serialize(Cosmetics, _path);
+        });
+
+        public RelayCommand DeserializeCommand => _deserializeCommand ??= new RelayCommand(o =>
+        {
+            var cosmetics = _facade.CosmeticService.Deserialize(_path);
+            Cosmetics = cosmetics;
+        });
 
         public IOpenFilteredCommand OpenFiltered { get; }
 
@@ -66,7 +83,7 @@ namespace ViewModels
             _saveEditCommand ??= new RelayCommand(o =>
             {
                 _facade.CosmeticService.Update(SelectedCosmetic);
-                Cosmetics = _facade.CosmeticService.GetAll();
+                Cosmetics = _facade.CosmeticService.GetAll() as ICollection<CosmeticModel>;
             }, o => SelectedCosmetic != null);
 
         public event PropertyChangedEventHandler PropertyChanged;
