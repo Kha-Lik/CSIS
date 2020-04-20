@@ -6,7 +6,7 @@ using Models;
 
 namespace ViewModels
 {
-    public class FilteredWindowViewModel : INotifyPropertyChanged
+    public sealed class FilteredWindowViewModel : INotifyPropertyChanged
     {
         private readonly IFacade _facade;
 
@@ -49,7 +49,7 @@ namespace ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
