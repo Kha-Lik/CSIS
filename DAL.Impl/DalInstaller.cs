@@ -11,6 +11,7 @@ namespace DAL.Impl
         {
             serviceCollection.AddDbContext<CsisDbContext>(x =>
                     x.UseSqlServer(ConfigurationManager.ConnectionStrings["Csis"].ConnectionString))
+            //serviceCollection.AddDbContext<CsisDbContext>(o => o.UseInMemoryDatabase("CSIS_DB"))
                 .AddSingleton<IUnitOfWork, UnitOfWork>()
                 .AddSingleton<ICosmeticRepository, CosmeticRepository>();
         }
