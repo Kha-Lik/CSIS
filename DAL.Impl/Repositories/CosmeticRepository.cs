@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using DAL.Abstract;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Impl
+namespace DAL.Impl.Repositories
 {
-    public class CosmeticRepository : ICosmeticRepository
+    public class CosmeticRepository : IRepository<Cosmetic>
     {
         private readonly CsisDbContext _dbContext;
 
@@ -15,31 +15,35 @@ namespace DAL.Impl
             _dbContext = dbContext;
         }
 
-        public IEnumerable<CosmeticEntity> GetAll()
+        public async Task<IEnumerable<Cosmetic>> GetAllAsync()
         {
-            return _dbContext.CosmeticEntities.AsNoTracking().ToList();
+            return await _dbContext.Cosmetics
+                .Include(c => c.Consignments)
+                .Include(c => c.Purchases)
+                .ToListAsync();
+        }
+        
+        public async Task<Cosmetic> GetByIdAsync(int id)
+        {
+            return await _dbContext.Cosmetics
+                .Include(c => c.Consignments)
+                .Include(c => c.Purchases)
+                .FirstAsync(c => c.Id == id);
         }
 
-        public void Create(CosmeticEntity entity)
+        public async Task CreateAsync(Cosmetic entity)
         {
-            _dbContext.CosmeticEntities.Add(entity);
+            await _dbContext.Cosmetics.AddAsync(entity);
         }
 
-        public void Delete(CosmeticEntity entity)
+        public void Delete(Cosmetic entity)
         {
-            _dbContext.CosmeticEntities.Remove(entity);
+            _dbContext.Cosmetics.Remove(entity);
         }
 
-        public void Edit(CosmeticEntity entity)
+        public void Edit(Cosmetic entity)
         {
-            _dbContext.CosmeticEntities.Update(entity);
-        }
-
-        public void Detach()
-        {
-            foreach (var cosmetic in _dbContext.ChangeTracker.Entries().ToArray())
-                if (cosmetic.Entity != null)
-                    cosmetic.State = EntityState.Detached;
+            _dbContext.Cosmetics.Update(entity);
         }
     }
 }

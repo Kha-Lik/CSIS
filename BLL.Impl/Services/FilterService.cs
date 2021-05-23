@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using BLL.Abstract;
 using DAL.Abstract;
@@ -19,14 +21,24 @@ namespace BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<CosmeticModel> GetFiltered()
+        public async Task<IEnumerable<CosmeticModel>> GetFiltered()
         {
-            var cosmetics = _unitOfWork.CosmeticRepository.GetAll();
-            var cosmeticModels = _mapper.Map<IEnumerable<CosmeticModel>>(cosmetics).ToList();
+            var consignments = await _unitOfWork.ConsignmentRepository.GetAllAsync();
+            var consignmentModels = _mapper.Map<IEnumerable<ConsignmentModel>>(consignments).ToList();
+            var cosmetics = consignmentModels.Select(c => c.Cosmetic).Distinct().ToList();
 
-            var filtered = cosmeticModels.Where(x => x.IsEnding).ToList();
-            filtered.AddRange(cosmeticModels.Where(x => x.Units <= _minLeftAmount));
-            filtered.AddRange(cosmeticModels.Where(x => x.DeliveryTime >= x.ShelfLife - x.UsingTime));
+            var filtered = consignmentModels.Where(x => x.IsEnding).Select(c => c.Cosmetic).Distinct().ToList();
+            filtered.AddRange(
+                from cosmeticModel 
+                in cosmetics 
+                let available = consignments
+                    .Where(c => c.CosmeticId == cosmeticModel.Id)
+                    .Sum(c => c.Units) 
+                where available <= _minLeftAmount 
+                select cosmeticModel
+                );
+            filtered.AddRange(consignmentModels.Where(x => 
+                x.Cosmetic.DeliveryTime >= (x.ProductionDate.AddDays(x.Cosmetic.ShelfLife) - DateTime.Today).Days).Select(c => c.Cosmetic));
 
             return filtered.Distinct();
         }

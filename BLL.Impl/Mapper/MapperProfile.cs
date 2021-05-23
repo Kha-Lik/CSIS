@@ -8,7 +8,10 @@ namespace BLL.Mapper
     {
         public MapperProfile()
         {
-            CreateMap<CosmeticEntity, CosmeticModel>().ReverseMap();
+            CreateMap<Cosmetic, CosmeticModel>().ReverseMap();
+            CreateMap<Consignment, ConsignmentModel>().ReverseMap();
+            CreateMap<Client, ClientModel>().ReverseMap();
+            CreateMap<Purchase, PurchaseModel>().ReverseMap();
         }
     }
 }

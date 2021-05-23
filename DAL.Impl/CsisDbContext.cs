@@ -10,6 +10,12 @@ namespace DAL.Impl
             Database.EnsureCreated();
         }
 
-        public DbSet<CosmeticEntity> CosmeticEntities { get; set; }
+        public DbSet<Cosmetic> Cosmetics { get; set; }
+
+        public DbSet<Client> Clients { get; set; }
+
+        public DbSet<Consignment> Consignments { get; set; }
+
+        public DbSet<Purchase> Purchases { get; set; }
     }
 }
