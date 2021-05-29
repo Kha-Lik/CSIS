@@ -8,6 +8,7 @@
         <SpaRoot>clientapp\</SpaRoot>
         <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>69ae4441-0319-4ec9-bd79-aaeba49b7736</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
