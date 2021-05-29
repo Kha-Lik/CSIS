@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using DAL.Abstract;
+﻿using DAL.Abstract;
 using DAL.Impl.Repositories;
 using Entities;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +10,9 @@ namespace DAL.Impl
     {
         public static void AddDataServices(this IServiceCollection serviceCollection, string connectionString)
         {
-            //serviceCollection.AddDbContext<CsisDbContext>(x =>
-            //        x.UseSqlServer(connectionString))
-            serviceCollection.AddDbContext<CsisDbContext>(o => o.UseInMemoryDatabase("CSIS_DB"))
+            serviceCollection.AddDbContext<CsisDbContext>(x =>
+                    x.UseSqlServer(connectionString))
+            //serviceCollection.AddDbContext<CsisDbContext>(o => o.UseInMemoryDatabase("CSIS_DB"))
                 .AddScoped<IUnitOfWork, UnitOfWork>()
                 .AddScoped<IRepository<Cosmetic>, CosmeticRepository>()
                 .AddScoped<IRepository<Client>, ClientRepository>()

@@ -1,6 +1,6 @@
 ﻿namespace Models
 {
-    public abstract class BaseModel
+    public abstract class BaseGetModel
     {
         public int Id { get; set; }
     }

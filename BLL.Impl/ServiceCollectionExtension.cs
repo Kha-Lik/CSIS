@@ -11,10 +11,10 @@ namespace BLL
         public static void AddBusinessServices(this IServiceCollection serviceCollection)
         {
             serviceCollection
-                .AddTransient<ICrudService<CosmeticModel>, CosmeticService>()
-                .AddTransient<ICrudService<ClientModel>, ClientService>()
-                .AddTransient<ICrudService<PurchaseModel>, PurchaseService>()
-                .AddTransient<ICrudService<ConsignmentModel>, ConsignmentService>()
+                .AddTransient<ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel>, CosmeticService>()
+                .AddTransient<ICrudService<ClientGetModel, ClientCreateUpdateModel>, ClientService>()
+                .AddTransient<ICrudService<PurchaseGetModel, PurchaseCreateUpdateModel>, PurchaseService>()
+                .AddTransient<ICrudService<ConsignmentGetModel, ConsignmentCreateUpdateModel>, ConsignmentService>()
                 .AddTransient<IFilterService, FilterService>()
                 .AddTransient<ISellerService, SellerService>()
                 .BindMapper();

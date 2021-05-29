@@ -17,18 +17,12 @@ namespace DAL.Impl.Repositories
 
         public async Task<IEnumerable<Cosmetic>> GetAllAsync()
         {
-            return await _dbContext.Cosmetics
-                .Include(c => c.Consignments)
-                .Include(c => c.Purchases)
-                .ToListAsync();
+            return await _dbContext.Cosmetics.ToListAsync();
         }
         
         public async Task<Cosmetic> GetByIdAsync(int id)
         {
-            return await _dbContext.Cosmetics
-                .Include(c => c.Consignments)
-                .Include(c => c.Purchases)
-                .FirstAsync(c => c.Id == id);
+            return await _dbContext.Cosmetics.FindAsync(id);
         }
 
         public async Task CreateAsync(Cosmetic entity)

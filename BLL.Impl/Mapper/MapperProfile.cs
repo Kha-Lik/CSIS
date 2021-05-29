@@ -8,10 +8,14 @@ namespace BLL.Mapper
     {
         public MapperProfile()
         {
-            CreateMap<Cosmetic, CosmeticModel>().ReverseMap();
-            CreateMap<Consignment, ConsignmentModel>().ReverseMap();
-            CreateMap<Client, ClientModel>().ReverseMap();
-            CreateMap<Purchase, PurchaseModel>().ReverseMap();
+            CreateMap<Cosmetic, CosmeticGetModel>().ReverseMap();
+            CreateMap<Consignment, ConsignmentGetModel>().ReverseMap();
+            CreateMap<Client, ClientGetModel>().ReverseMap();
+            CreateMap<Purchase, PurchaseGetModel>().ReverseMap();
+            CreateMap<CosmeticCreateUpdateModel, Cosmetic>();
+            CreateMap<ClientCreateUpdateModel, Client>();
+            CreateMap<PurchaseCreateUpdateModel, Purchase>();
+            CreateMap<ConsignmentCreateUpdateModel, Consignment>();
         }
     }
 }

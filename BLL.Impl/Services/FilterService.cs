@@ -21,13 +21,13 @@ namespace BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<CosmeticModel>> GetFiltered()
+        public async Task<IEnumerable<CosmeticGetModel>> GetFiltered()
         {
             var consignments = await _unitOfWork.ConsignmentRepository.GetAllAsync();
-            var consignmentModels = _mapper.Map<IEnumerable<ConsignmentModel>>(consignments).ToList();
-            var cosmetics = consignmentModels.Select(c => c.Cosmetic).Distinct().ToList();
+            var consignmentModels = _mapper.Map<IEnumerable<ConsignmentGetModel>>(consignments).ToList();
+            var cosmetics = consignmentModels.Select(c => c.CosmeticGetGet).Distinct().ToList();
 
-            var filtered = consignmentModels.Where(x => x.IsEnding).Select(c => c.Cosmetic).Distinct().ToList();
+            var filtered = consignmentModels.Where(x => x.IsEnding).Select(c => c.CosmeticGetGet).Distinct().ToList();
             filtered.AddRange(
                 from cosmeticModel 
                 in cosmetics 
@@ -38,7 +38,7 @@ namespace BLL.Services
                 select cosmeticModel
                 );
             filtered.AddRange(consignmentModels.Where(x => 
-                x.Cosmetic.DeliveryTime >= (x.ProductionDate.AddDays(x.Cosmetic.ShelfLife) - DateTime.Today).Days).Select(c => c.Cosmetic));
+                x.CosmeticGetGet.DeliveryTime >= (x.ProductionDate.AddDays(x.CosmeticGetGet.ShelfLife) - DateTime.Today).Days).Select(c => c.CosmeticGetGet));
 
             return filtered.Distinct();
         }

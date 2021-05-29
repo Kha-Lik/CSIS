@@ -4,15 +4,15 @@ using Models;
 
 namespace BLL.Abstract
 {
-    public interface ICrudService<TModel> where TModel : BaseModel
+    public interface ICrudService<TGetModel, TCreateUpdateModel> where TGetModel : BaseGetModel
     {
-        public Task<IEnumerable<TModel>> GetAllAsync();
+        public Task<IEnumerable<TGetModel>> GetAllAsync();
 
-        public Task<TModel> GetByIdAsync(int id);
+        public Task<TGetModel> GetByIdAsync(int id);
         
-        public Task CreateAsync(TModel model);
+        public Task CreateAsync(TCreateUpdateModel model);
 
-        public Task UpdateAsync(TModel model);
+        public Task UpdateAsync(TCreateUpdateModel model, int id);
 
         public Task DeleteByIdAsync(int id);
     }

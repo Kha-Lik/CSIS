@@ -8,7 +8,7 @@ using Models;
 
 namespace BLL.Services
 {
-    public class CosmeticService : ICrudService<CosmeticModel>
+    public class CosmeticService : ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -19,28 +19,28 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CosmeticModel>> GetAllAsync()
+        public async Task<IEnumerable<CosmeticGetModel>> GetAllAsync()
         {
             var cosmetics = await _unitOfWork.CosmeticRepository.GetAllAsync();
 
-            return _mapper.Map<IEnumerable<CosmeticModel>>(cosmetics);
+            return _mapper.Map<IEnumerable<CosmeticGetModel>>(cosmetics);
         }
 
-        public async Task<CosmeticModel> GetByIdAsync(int id)
+        public async Task<CosmeticGetModel> GetByIdAsync(int id)
         {
-            return _mapper.Map<CosmeticModel>(await _unitOfWork.CosmeticRepository.GetByIdAsync(id));
+            return _mapper.Map<CosmeticGetModel>(await _unitOfWork.CosmeticRepository.GetByIdAsync(id));
         }
 
-        public async Task CreateAsync(CosmeticModel model)
+        public async Task CreateAsync(CosmeticCreateUpdateModel model)
         {
             var entity = _mapper.Map<Cosmetic>(model);
             await _unitOfWork.CosmeticRepository.CreateAsync(entity);
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(CosmeticModel model)
+        public async Task UpdateAsync(CosmeticCreateUpdateModel model, int id)
         {
-            var entity = await _unitOfWork.CosmeticRepository.GetByIdAsync(model.Id);
+            var entity = await _unitOfWork.CosmeticRepository.GetByIdAsync(id);
             _mapper.Map(model, entity);
             _unitOfWork.CosmeticRepository.Edit(entity);
             await _unitOfWork.SaveChangesAsync();

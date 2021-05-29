@@ -8,7 +8,7 @@ using Models;
 
 namespace BLL.Services
 {
-    public class ClientService : ICrudService<ClientModel>
+    public class ClientService : ICrudService<ClientGetModel, ClientCreateUpdateModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -19,25 +19,25 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ClientModel>> GetAllAsync()
+        public async Task<IEnumerable<ClientGetModel>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<ClientModel>>(await _unitOfWork.ClientRepository.GetAllAsync());
+            return _mapper.Map<IEnumerable<ClientGetModel>>(await _unitOfWork.ClientRepository.GetAllAsync());
         }
 
-        public async Task<ClientModel> GetByIdAsync(int id)
+        public async Task<ClientGetModel> GetByIdAsync(int id)
         {
-            return _mapper.Map<ClientModel>(await _unitOfWork.ClientRepository.GetByIdAsync(id));
+            return _mapper.Map<ClientGetModel>(await _unitOfWork.ClientRepository.GetByIdAsync(id));
         }
 
-        public async Task CreateAsync(ClientModel model)
+        public async Task CreateAsync(ClientCreateUpdateModel model)
         {
             await _unitOfWork.ClientRepository.CreateAsync(_mapper.Map<Client>(model));
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(ClientModel model)
+        public async Task UpdateAsync(ClientCreateUpdateModel model, int id)
         {
-            var entity = await _unitOfWork.ClientRepository.GetByIdAsync(model.Id);
+            var entity = await _unitOfWork.ClientRepository.GetByIdAsync(id);
             _mapper.Map(model, entity);
             _unitOfWork.ClientRepository.Edit(entity);
             await _unitOfWork.SaveChangesAsync();

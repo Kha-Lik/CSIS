@@ -8,7 +8,7 @@ using Models;
 
 namespace BLL.Services
 {
-    public class PurchaseService : ICrudService<PurchaseModel>
+    public class PurchaseService : ICrudService<PurchaseGetModel, PurchaseCreateUpdateModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -19,25 +19,25 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<PurchaseModel>> GetAllAsync()
+        public async Task<IEnumerable<PurchaseGetModel>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<PurchaseModel>>(await _unitOfWork.PurchaseRepository.GetAllAsync());
+            return _mapper.Map<IEnumerable<PurchaseGetModel>>(await _unitOfWork.PurchaseRepository.GetAllAsync());
         }
 
-        public async Task<PurchaseModel> GetByIdAsync(int id)
+        public async Task<PurchaseGetModel> GetByIdAsync(int id)
         {
-            return _mapper.Map<PurchaseModel>(await _unitOfWork.PurchaseRepository.GetByIdAsync(id));
+            return _mapper.Map<PurchaseGetModel>(await _unitOfWork.PurchaseRepository.GetByIdAsync(id));
         }
 
-        public async Task CreateAsync(PurchaseModel model)
+        public async Task CreateAsync(PurchaseCreateUpdateModel model)
         {
             await _unitOfWork.PurchaseRepository.CreateAsync(_mapper.Map<Purchase>(model));
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(PurchaseModel model)
+        public async Task UpdateAsync(PurchaseCreateUpdateModel model, int id)
         {
-            var entity = await _unitOfWork.PurchaseRepository.GetByIdAsync(model.Id);
+            var entity = await _unitOfWork.PurchaseRepository.GetByIdAsync(id);
             _mapper.Map(model, entity);
             _unitOfWork.PurchaseRepository.Edit(entity);
             await _unitOfWork.SaveChangesAsync();

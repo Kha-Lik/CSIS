@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    [Serializable]
-    public class CosmeticModel : BaseModel
+    public class CosmeticGetModel : BaseGetModel
     {
         public string Name { get; set; }
         public int Price { get; set; }

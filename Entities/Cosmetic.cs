@@ -8,8 +8,5 @@ namespace Entities
         public int Price { get; set; }
         public int DeliveryTime { get; set; }
         public int ShelfLife { get; set; }
-
-        public IEnumerable<Consignment> Consignments { get; set; }
-        public IEnumerable<Purchase> Purchases { get; set; }
     }
 }

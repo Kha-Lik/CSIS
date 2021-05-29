@@ -22,8 +22,8 @@ namespace BLL.Services
 
         public async Task SellCosmeticsToClient(int clientId, int cosmeticId, int units)
         {
-            var clientModel = _mapper.Map<ClientModel>(await _unitOfWork.ClientRepository.GetByIdAsync(clientId));
-            var cosmeticModel = _mapper.Map<CosmeticModel>(await _unitOfWork.CosmeticRepository.GetByIdAsync(cosmeticId));
+            var clientModel = _mapper.Map<ClientGetModel>(await _unitOfWork.ClientRepository.GetByIdAsync(clientId));
+            var cosmeticModel = _mapper.Map<CosmeticGetModel>(await _unitOfWork.CosmeticRepository.GetByIdAsync(cosmeticId));
             
             var consignments = (await _unitOfWork.ConsignmentRepository.GetAllAsync())
                                                     .Where(c => c.CosmeticId == cosmeticModel.Id).ToList();
@@ -32,11 +32,11 @@ namespace BLL.Services
             if (units > available)
                 throw new InvalidOperationException($"There are only {available} units of {cosmeticModel.Name} at storage");
             
-            var purchase = new PurchaseModel
+            var purchase = new PurchaseGetModel
             {
-                Client = clientModel,
+                ClientGet = clientModel,
                 ClientId = clientModel.Id,
-                Cosmetic = cosmeticModel,
+                CosmeticGetGet = cosmeticModel,
                 CosmeticId = cosmeticModel.Id,
                 PurchaseDate = DateTime.Today,
                 Units = units
