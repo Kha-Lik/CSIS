@@ -80,7 +80,7 @@ namespace MVC.Controllers
             }
             catch (InvalidOperationException e)
             {
-                return Ok(e.Message);
+                return View("ErrorMessage", new ErrorMessageViewModel{Message = e.Message, ReturnAction = "Create", ReturnController = "Purchases"});
             }
             return RedirectToAction(nameof(Index));
         }

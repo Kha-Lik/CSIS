@@ -8,6 +8,7 @@ namespace DAL.Impl
     {
         public CsisDbContext(DbContextOptions optionsBuilder) : base(optionsBuilder)
         {
+            Database.EnsureCreated();
         }
         
         public DbSet<Cosmetic> Cosmetics { get; set; }

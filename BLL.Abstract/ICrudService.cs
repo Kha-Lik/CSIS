@@ -4,7 +4,7 @@ using Models;
 
 namespace BLL.Abstract
 {
-    public interface ICrudService<TGetModel, TCreateUpdateModel> where TGetModel : BaseGetModel
+    public interface ICrudService<TGetModel, in TCreateUpdateModel> where TGetModel : BaseGetModel
     {
         public Task<IEnumerable<TGetModel>> GetAllAsync();
 

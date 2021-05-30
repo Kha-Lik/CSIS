@@ -38,7 +38,8 @@ namespace BLL.Services
                 select cosmeticModel
                 );
             filtered.AddRange(consignmentModels.Where(x => 
-                x.Cosmetic.DeliveryTime >= (x.ProductionDate.AddDays(x.Cosmetic.ShelfLife) - DateTime.Today).Days).Select(c => c.Cosmetic));
+                x.Cosmetic.DeliveryTime >= (x.ProductionDate.AddDays(x.Cosmetic.ShelfLife) - DateTime.Today).Days)
+                .Select(c => c.Cosmetic));
 
             return filtered.Distinct();
         }
