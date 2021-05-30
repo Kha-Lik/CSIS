@@ -13,17 +13,29 @@ namespace MVC.Controllers
     {
         private readonly ICrudService<ConsignmentGetModel, ConsignmentCreateUpdateModel> _consignmentService;
         private readonly ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> _cosmeticService;
+        private readonly IFilterService _filterService;
 
-        public ConsignmentsController(ICrudService<ConsignmentGetModel, ConsignmentCreateUpdateModel> consignmentService, ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> cosmeticService)
+        public ConsignmentsController(ICrudService<ConsignmentGetModel, ConsignmentCreateUpdateModel> consignmentService, ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> cosmeticService, IFilterService filterService)
         {
             _consignmentService = consignmentService;
             _cosmeticService = cosmeticService;
+            _filterService = filterService;
         }
 
         // GET: Consignments
         public async Task<IActionResult> Index()
         {
             return View(await _consignmentService.GetAllAsync());
+        }
+
+        public async Task<IActionResult> Filtered(int? amount)
+        {
+            if (amount is not null)
+            {
+                _filterService.SetMinLeftAmount(amount.Value);
+            }
+
+            return View(await _filterService.GetFiltered());
         }
 
         // GET: Consignments/Details/5

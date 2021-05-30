@@ -17,12 +17,12 @@ namespace DAL.Impl.Repositories
 
         public async Task<IEnumerable<Client>> GetAllAsync()
         {
-            return await _context.Clients.Include(c => c.Purchases).ToListAsync();
+            return await _context.Clients.Include(c => c.Purchases).AsNoTracking().ToListAsync();
         }
 
         public async Task<Client> GetByIdAsync(int id)
         {
-            return await _context.Clients.Include(c => c.Purchases).FirstAsync(c => c.Id == id);
+            return await _context.Clients.Include(c => c.Purchases).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task CreateAsync(Client entity)

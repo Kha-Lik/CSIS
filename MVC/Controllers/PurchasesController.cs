@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using BLL.Abstract;
 using Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -6,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -15,12 +18,14 @@ namespace MVC.Controllers
         private readonly ICrudService<PurchaseGetModel, PurchaseCreateUpdateModel> _purchaseService;
         private readonly ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> _cosmeticService;
         private readonly ICrudService<ClientGetModel, ClientCreateUpdateModel> _clientService;
+        private readonly ISellerService _sellerService;
 
-        public PurchasesController(ICrudService<PurchaseGetModel, PurchaseCreateUpdateModel> purchaseService, ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> cosmeticService, ICrudService<ClientGetModel, ClientCreateUpdateModel> clientService)
+        public PurchasesController(ICrudService<PurchaseGetModel, PurchaseCreateUpdateModel> purchaseService, ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> cosmeticService, ICrudService<ClientGetModel, ClientCreateUpdateModel> clientService, ISellerService sellerService)
         {
             _purchaseService = purchaseService;
             _cosmeticService = cosmeticService;
             _clientService = clientService;
+            _sellerService = sellerService;
         }
         
         // GET: Purchases
@@ -51,6 +56,7 @@ namespace MVC.Controllers
         {
             ViewData["ClientId"] = new SelectList((await _clientService.GetAllAsync()), "Id", "Id");
             ViewData["CosmeticId"] = new SelectList((await _cosmeticService.GetAllAsync()), "Id", "Id");
+            
             return View();
         }
 
@@ -59,7 +65,7 @@ namespace MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientId,CosmeticId,PurchaseDate,Units")] PurchaseCreateUpdateModel purchase)
+        public async Task<IActionResult> Create([Bind("ClientId,CosmeticId,Units")] PurchaseCreateViewModel purchase)
         {
             if (!ModelState.IsValid)
             {
@@ -68,7 +74,14 @@ namespace MVC.Controllers
                 return View(purchase);
             }
 
-            await _purchaseService.CreateAsync(purchase);
+            try
+            {
+                await _sellerService.SellCosmeticsToClient(purchase.ClientId, purchase.CosmeticId, purchase.Units);
+            }
+            catch (InvalidOperationException e)
+            {
+                return Ok(e.Message);
+            }
             return RedirectToAction(nameof(Index));
         }
 
