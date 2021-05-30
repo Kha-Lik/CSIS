@@ -1,15 +1,15 @@
-﻿@model IEnumerable<Entities.Purchase>
+﻿@model IEnumerable<Models.PurchaseGetModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-light">Purchases</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-dark table-striped">
     <thead>
         <tr>
             <th>
@@ -30,23 +30,23 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            <td style="vertical-align: middle">
                 @Html.DisplayFor(modelItem => item.PurchaseDate)
             </td>
-            <td>
+            <td style="vertical-align: middle">
                 @Html.DisplayFor(modelItem => item.Units)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.Id)
+            <td style="vertical-align: middle">
+                @Html.DisplayFor(modelItem => item.Client.FullName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cosmetic.Id)
+            <td style="vertical-align: middle">
+                @Html.DisplayFor(modelItem => item.Cosmetic.Name)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            <td style="vertical-align: middle">
+                            <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
         </tr>
 }
     </tbody>

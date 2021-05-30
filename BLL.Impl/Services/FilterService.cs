@@ -25,9 +25,9 @@ namespace BLL.Services
         {
             var consignments = await _unitOfWork.ConsignmentRepository.GetAllAsync();
             var consignmentModels = _mapper.Map<IEnumerable<ConsignmentGetModel>>(consignments).ToList();
-            var cosmetics = consignmentModels.Select(c => c.CosmeticGetGet).Distinct().ToList();
+            var cosmetics = consignmentModels.Select(c => c.Cosmetic).Distinct().ToList();
 
-            var filtered = consignmentModels.Where(x => x.IsEnding).Select(c => c.CosmeticGetGet).Distinct().ToList();
+            var filtered = consignmentModels.Where(x => x.IsEnding).Select(c => c.Cosmetic).Distinct().ToList();
             filtered.AddRange(
                 from cosmeticModel 
                 in cosmetics 
@@ -38,7 +38,7 @@ namespace BLL.Services
                 select cosmeticModel
                 );
             filtered.AddRange(consignmentModels.Where(x => 
-                x.CosmeticGetGet.DeliveryTime >= (x.ProductionDate.AddDays(x.CosmeticGetGet.ShelfLife) - DateTime.Today).Days).Select(c => c.CosmeticGetGet));
+                x.Cosmetic.DeliveryTime >= (x.ProductionDate.AddDays(x.Cosmetic.ShelfLife) - DateTime.Today).Days).Select(c => c.Cosmetic));
 
             return filtered.Distinct();
         }

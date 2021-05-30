@@ -30,6 +30,11 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "CsisWebAPI", Version = "v1"});
             });
+            
+            services.AddCors(c =>  
+            {  
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());  
+            });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "clientapp/build"; });
@@ -49,6 +54,8 @@ namespace API
                 app.UseHsts();
             }
 
+            app.UseCors("AllowOrigin");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -62,6 +69,7 @@ namespace API
             });
 
             app.UseRouting();
+            
 
             app.UseEndpoints(endpoints =>
             {

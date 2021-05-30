@@ -9,7 +9,7 @@ namespace Models
         public DateTime PurchaseDate { get; set; }
         public int Units { get; set; }
 
-        public ClientGetModel ClientGet { get; set; }
-        public CosmeticGetModel CosmeticGetGet { get; set; }
+        public ClientGetModel Client { get; set; }
+        public CosmeticGetModel Cosmetic { get; set; }
     }
 }

@@ -1,29 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BLL.Abstract;
+using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DAL.Impl;
-using Entities;
+using Models;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class PurchasesController : Controller
     {
-        private readonly CsisDbContext _context;
+        private readonly ICrudService<PurchaseGetModel, PurchaseCreateUpdateModel> _purchaseService;
+        private readonly ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> _cosmeticService;
+        private readonly ICrudService<ClientGetModel, ClientCreateUpdateModel> _clientService;
 
-        public PurchasesController(CsisDbContext context)
+        public PurchasesController(ICrudService<PurchaseGetModel, PurchaseCreateUpdateModel> purchaseService, ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> cosmeticService, ICrudService<ClientGetModel, ClientCreateUpdateModel> clientService)
         {
-            _context = context;
+            _purchaseService = purchaseService;
+            _cosmeticService = cosmeticService;
+            _clientService = clientService;
         }
-
+        
         // GET: Purchases
         public async Task<IActionResult> Index()
         {
-            var csisDbContext = _context.Purchases.Include(p => p.Client).Include(p => p.Cosmetic);
-            return View(await csisDbContext.ToListAsync());
+            return View(await _purchaseService.GetAllAsync());
         }
 
         // GET: Purchases/Details/5
@@ -34,10 +37,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var purchase = await _context.Purchases
-                .Include(p => p.Client)
-                .Include(p => p.Cosmetic)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var purchase = await _purchaseService.GetByIdAsync(id.Value);
             if (purchase == null)
             {
                 return NotFound();
@@ -47,10 +47,10 @@ namespace MVC.Controllers
         }
 
         // GET: Purchases/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "Id");
-            ViewData["CosmeticId"] = new SelectList(_context.Cosmetics, "Id", "Id");
+            ViewData["ClientId"] = new SelectList((await _clientService.GetAllAsync()), "Id", "Id");
+            ViewData["CosmeticId"] = new SelectList((await _cosmeticService.GetAllAsync()), "Id", "Id");
             return View();
         }
 
@@ -59,17 +59,17 @@ namespace MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientId,CosmeticId,PurchaseDate,Units,Id")] Purchase purchase)
+        public async Task<IActionResult> Create([Bind("ClientId,CosmeticId,PurchaseDate,Units")] PurchaseCreateUpdateModel purchase)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(purchase);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewData["ClientId"] = new SelectList((await _clientService.GetAllAsync()), "Id", "Id");
+                ViewData["CosmeticId"] = new SelectList((await _cosmeticService.GetAllAsync()), "Id", "Id");
+                return View(purchase);
             }
-            ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "Id", purchase.ClientId);
-            ViewData["CosmeticId"] = new SelectList(_context.Cosmetics, "Id", "Id", purchase.CosmeticId);
-            return View(purchase);
+
+            await _purchaseService.CreateAsync(purchase);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Purchases/Edit/5
@@ -80,13 +80,13 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var purchase = await _context.Purchases.FindAsync(id);
+            var purchase = await _purchaseService.GetByIdAsync(id.Value);
             if (purchase == null)
             {
                 return NotFound();
             }
-            ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "Id", purchase.ClientId);
-            ViewData["CosmeticId"] = new SelectList(_context.Cosmetics, "Id", "Id", purchase.CosmeticId);
+            ViewData["ClientId"] = new SelectList((await _clientService.GetAllAsync()), "Id", "Id");
+            ViewData["CosmeticId"] = new SelectList((await _cosmeticService.GetAllAsync()), "Id", "Id");
             return View(purchase);
         }
 
@@ -95,36 +95,46 @@ namespace MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ClientId,CosmeticId,PurchaseDate,Units,Id")] Purchase purchase)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientId,CosmeticId,PurchaseDate,Units")] PurchaseCreateUpdateModel purchase)
         {
-            if (id != purchase.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(purchase);
-                    await _context.SaveChangesAsync();
+                    await _purchaseService.UpdateAsync(purchase, id);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PurchaseExists(purchase.Id))
+                    if (!(await PurchaseExists(id)))
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "Id", purchase.ClientId);
-            ViewData["CosmeticId"] = new SelectList(_context.Cosmetics, "Id", "Id", purchase.CosmeticId);
-            return View(purchase);
+            ViewData["ClientId"] = new SelectList((await _clientService.GetAllAsync()), "Id", "Id");
+            ViewData["CosmeticId"] = new SelectList((await _cosmeticService.GetAllAsync()), "Id", "Id");
+            return View(new PurchaseGetModel
+            {
+                Client = new ClientGetModel
+                {
+                    FullName = purchase.Client.FullName,
+                    PhoneNumber = purchase.Client.PhoneNumber
+                },
+                Cosmetic = new CosmeticGetModel
+                {
+                    DeliveryTime = purchase.Cosmetic.DeliveryTime,
+                    Name = purchase.Cosmetic.Name,
+                    Price = purchase.Cosmetic.Price,
+                    ShelfLife = purchase.Cosmetic.ShelfLife
+                },
+                ClientId = purchase.ClientId,
+                CosmeticId = purchase.CosmeticId,
+                PurchaseDate = purchase.PurchaseDate,
+                Units = purchase.Units
+            });
         }
 
         // GET: Purchases/Delete/5
@@ -135,10 +145,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var purchase = await _context.Purchases
-                .Include(p => p.Client)
-                .Include(p => p.Cosmetic)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var purchase = await _purchaseService.GetByIdAsync(id.Value);
             if (purchase == null)
             {
                 return NotFound();
@@ -152,15 +159,13 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var purchase = await _context.Purchases.FindAsync(id);
-            _context.Purchases.Remove(purchase);
-            await _context.SaveChangesAsync();
+            await _purchaseService.DeleteByIdAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PurchaseExists(int id)
+        private async Task<bool> PurchaseExists(int id)
         {
-            return _context.Purchases.Any(e => e.Id == id);
+            return (await _purchaseService.GetByIdAsync(id)) is not null;
         }
     }
 }

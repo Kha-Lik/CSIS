@@ -1,44 +1,45 @@
-﻿@model Entities.Purchase
+﻿@model Models.PurchaseCreateUpdateModel;
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="text-light">Create</h1>
 
-<h4>Purchase</h4>
+<h4 class="text-light">Purchase</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ClientId" class="control-label"></label>
-                <select asp-for="ClientId" class ="form-control" asp-items="ViewBag.ClientId"></select>
+                <label asp-for="ClientId" class="control-label text-light"></label>
+                <select asp-for="ClientId" class ="form-control bg-dark text-light" asp-items="ViewBag.ClientId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="CosmeticId" class="control-label"></label>
-                <select asp-for="CosmeticId" class ="form-control" asp-items="ViewBag.CosmeticId"></select>
+                <label asp-for="CosmeticId" class="control-label text-light"></label>
+                <select asp-for="CosmeticId" class ="form-control bg-dark text-light" asp-items="ViewBag.CosmeticId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="PurchaseDate" class="control-label"></label>
-                <input asp-for="PurchaseDate" class="form-control" />
+                <label asp-for="PurchaseDate" class="control-label text-light"></label>
+                <input asp-for="PurchaseDate" class="form-control bg-dark text-light" />
                 <span asp-validation-for="PurchaseDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Units" class="control-label"></label>
-                <input asp-for="Units" class="form-control" />
+                <label asp-for="Units" class="control-label text-light"></label>
+                <input asp-for="Units" class="form-control bg-dark text-light" />
                 <span asp-validation-for="Units" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                                <input type="submit" value="Create" class="btn btn-outline-primary text-light" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+
 </div>
 
 @section Scripts {

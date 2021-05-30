@@ -1,0 +1,40 @@
+﻿@model UserRegisterViewModel
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "_Layout";
+}
+
+<h2 class="text-light">Registration</h2>
+
+<form method="post" asp-controller="Account" asp-action="Register">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group text-light">
+        <label asp-for="Email"></label><br />
+        <input asp-for="Email" class="form-control  bg-dark text-light"/>
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div class="form-group text-light">
+        <label asp-for="Name"></label><br />
+        <input asp-for="Name" class="form-control bg-dark text-light"/>
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group text-light">
+            <label asp-for="SecondName"></label><br />
+            <input asp-for="SecondName" class="form-control bg-dark text-light" />
+            <span asp-validation-for="SecondName"></span>
+        </div>
+    <div class="form-group text-light">
+        <label asp-for="Password"></label><br />
+        <input asp-for="Password" class="form-control bg-dark text-light" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="form-group text-light">
+        <label asp-for="PasswordConfirm"></label><br />
+        <input asp-for="PasswordConfirm" class="form-control bg-dark text-light" />
+        <span asp-validation-for="PasswordConfirm"></span>
+    </div>
+    <div class="container flex-grow" style="width: 100%">
+        <button class="m-1 btn btn-primary" style="align-self: flex-end" type="submit">Register</button>
+    </div>
+</form>

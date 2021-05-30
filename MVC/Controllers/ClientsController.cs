@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BLL.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DAL.Impl;
-using Entities;
+using Models;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class ClientsController : Controller
     {
-        private readonly CsisDbContext _context;
+        private readonly ICrudService<ClientGetModel, ClientCreateUpdateModel> _clientService;
 
-        public ClientsController(CsisDbContext context)
+        public ClientsController( ICrudService<ClientGetModel, ClientCreateUpdateModel> clientService)
         {
-            _context = context;
+            _clientService = clientService;
         }
 
         // GET: Clients
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clients.ToListAsync());
+            return View(await _clientService.GetAllAsync());
         }
 
         // GET: Clients/Details/5
@@ -33,8 +31,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var client = await _clientService.GetByIdAsync(id.Value);
             if (client == null)
             {
                 return NotFound();
@@ -54,12 +51,11 @@ namespace MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FullName,PhoneNumber,Id")] Client client)
+        public async Task<IActionResult> Create([Bind("FullName,PhoneNumber")] ClientCreateUpdateModel client)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(client);
-                await _context.SaveChangesAsync();
+                await _clientService.CreateAsync(client);
                 return RedirectToAction(nameof(Index));
             }
             return View(client);
@@ -73,7 +69,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients.FindAsync(id);
+            var client = await _clientService.GetByIdAsync(id.Value);
             if (client == null)
             {
                 return NotFound();
@@ -86,34 +82,27 @@ namespace MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FullName,PhoneNumber,Id")] Client client)
+        public async Task<IActionResult> Edit(int id, [Bind("FullName,PhoneNumber")] ClientCreateUpdateModel client)
         {
-            if (id != client.Id)
+            if (!ModelState.IsValid) return View(new ClientGetModel
             {
-                return NotFound();
+                FullName = client.FullName,
+                PhoneNumber = client.PhoneNumber
+            });
+            try
+            {
+                await _clientService.UpdateAsync(client, id);
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!(await ClientExists(id)))
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(client);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClientExists(client.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                throw;
             }
-            return View(client);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Clients/Delete/5
@@ -124,8 +113,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var client = await _clientService.GetByIdAsync(id.Value);
             if (client == null)
             {
                 return NotFound();
@@ -139,15 +127,13 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var client = await _context.Clients.FindAsync(id);
-            _context.Clients.Remove(client);
-            await _context.SaveChangesAsync();
+            await _clientService.DeleteByIdAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClientExists(int id)
+        private async Task<bool> ClientExists(int id)
         {
-            return _context.Clients.Any(e => e.Id == id);
+            return (await _clientService.GetByIdAsync(id)) is not null;
         }
     }
 }

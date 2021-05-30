@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BLL.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DAL.Impl;
-using Entities;
+using Models;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class CosmeticsController : Controller
     {
-        private readonly CsisDbContext _context;
+        private readonly ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> _cosmeticService;
 
-        public CosmeticsController(CsisDbContext context)
+        public CosmeticsController(ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> cosmeticService)
         {
-            _context = context;
+            _cosmeticService = cosmeticService;
         }
 
         // GET: Cosmetics
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cosmetics.ToListAsync());
+            return View(await _cosmeticService.GetAllAsync());
         }
 
         // GET: Cosmetics/Details/5
@@ -33,8 +31,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var cosmetic = await _context.Cosmetics
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var cosmetic = await _cosmeticService.GetByIdAsync(id.Value);
             if (cosmetic == null)
             {
                 return NotFound();
@@ -54,12 +51,11 @@ namespace MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,DeliveryTime,ShelfLife,Id")] Cosmetic cosmetic)
+        public async Task<IActionResult> Create([Bind("Name,Price,DeliveryTime,ShelfLife")] CosmeticCreateUpdateModel cosmetic)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cosmetic);
-                await _context.SaveChangesAsync();
+                await _cosmeticService.CreateAsync(cosmetic);
                 return RedirectToAction(nameof(Index));
             }
             return View(cosmetic);
@@ -73,7 +69,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var cosmetic = await _context.Cosmetics.FindAsync(id);
+            var cosmetic = await _cosmeticService.GetByIdAsync(id.Value);
             if (cosmetic == null)
             {
                 return NotFound();
@@ -86,34 +82,28 @@ namespace MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Price,DeliveryTime,ShelfLife,Id")] Cosmetic cosmetic)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Price,DeliveryTime,ShelfLife")] CosmeticCreateUpdateModel cosmetic)
         {
-            if (id != cosmetic.Id)
+            if (!ModelState.IsValid) return View(new CosmeticGetModel
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
+                DeliveryTime = cosmetic.DeliveryTime, 
+                Name = cosmetic.Name, 
+                Price = cosmetic.Price, 
+                ShelfLife = cosmetic.ShelfLife
+            });
+            try
             {
-                try
-                {
-                    _context.Update(cosmetic);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CosmeticExists(cosmetic.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await _cosmeticService.UpdateAsync(cosmetic, id);
             }
-            return View(cosmetic);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!(await CosmeticExists(id)))
+                {
+                    return NotFound();
+                }
+                throw;
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Cosmetics/Delete/5
@@ -124,8 +114,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var cosmetic = await _context.Cosmetics
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var cosmetic = await _cosmeticService.GetByIdAsync(id.Value);
             if (cosmetic == null)
             {
                 return NotFound();
@@ -139,15 +128,13 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cosmetic = await _context.Cosmetics.FindAsync(id);
-            _context.Cosmetics.Remove(cosmetic);
-            await _context.SaveChangesAsync();
+            await _cosmeticService.DeleteByIdAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CosmeticExists(int id)
+        private async Task<bool> CosmeticExists(int id)
         {
-            return _context.Cosmetics.Any(e => e.Id == id);
+            return (await _cosmeticService.GetByIdAsync(id)) is not null;
         }
     }
 }

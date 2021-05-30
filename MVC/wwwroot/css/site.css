@@ -12,6 +12,10 @@ a {
   color: #0366d6;
 }
 
+td {
+  vertical-align: middle;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;

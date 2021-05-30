@@ -34,9 +34,9 @@ namespace BLL.Services
             
             var purchase = new PurchaseGetModel
             {
-                ClientGet = clientModel,
+                Client = clientModel,
                 ClientId = clientModel.Id,
-                CosmeticGetGet = cosmeticModel,
+                Cosmetic = cosmeticModel,
                 CosmeticId = cosmeticModel.Id,
                 PurchaseDate = DateTime.Today,
                 Units = units

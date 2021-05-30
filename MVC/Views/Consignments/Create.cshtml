@@ -1,34 +1,34 @@
-﻿@model Entities.Consignment
+﻿@model Models.ConsignmentCreateUpdateModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="text-light">Create</h1>
 
-<h4>Consignment</h4>
+<h4 class="text-light">Consignment</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CosmeticId" class="control-label"></label>
-                <select asp-for="CosmeticId" class ="form-control" asp-items="ViewBag.CosmeticId"></select>
+                <label asp-for="CosmeticId" class="control-label text-light"></label>
+                <select asp-for="CosmeticId" class ="form-control text-light bg-dark" asp-items="ViewBag.CosmeticId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Units" class="control-label"></label>
-                <input asp-for="Units" class="form-control" />
+                <label asp-for="Units" class="control-label text-light"></label>
+                <input asp-for="Units" class="form-control text-light bg-dark" />
                 <span asp-validation-for="Units" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProductionDate" class="control-label"></label>
-                <input asp-for="ProductionDate" class="form-control" />
+                <label asp-for="ProductionDate" class="control-label text-light"></label>
+                <input asp-for="ProductionDate" class="form-control text-light bg-dark" />
                 <span asp-validation-for="ProductionDate" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsEnding" /> @Html.DisplayNameFor(model => model.IsEnding)
+                <label class="form-check-label text-light">
+                    <input class="form-check-input text-light bg-dark" asp-for="IsEnding" /> @Html.DisplayNameFor(model => model.IsEnding)
                 </label>
             </div>
             <div class="form-group">
@@ -39,7 +39,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BLL.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DAL.Impl;
-using Entities;
+using Models;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class ConsignmentsController : Controller
     {
-        private readonly CsisDbContext _context;
+        private readonly ICrudService<ConsignmentGetModel, ConsignmentCreateUpdateModel> _consignmentService;
+        private readonly ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> _cosmeticService;
 
-        public ConsignmentsController(CsisDbContext context)
+        public ConsignmentsController(ICrudService<ConsignmentGetModel, ConsignmentCreateUpdateModel> consignmentService, ICrudService<CosmeticGetModel, CosmeticCreateUpdateModel> cosmeticService)
         {
-            _context = context;
+            _consignmentService = consignmentService;
+            _cosmeticService = cosmeticService;
         }
 
         // GET: Consignments
         public async Task<IActionResult> Index()
         {
-            var csisDbContext = _context.Consignments.Include(c => c.Cosmetic);
-            return View(await csisDbContext.ToListAsync());
+            return View(await _consignmentService.GetAllAsync());
         }
 
         // GET: Consignments/Details/5
@@ -34,9 +34,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var consignment = await _context.Consignments
-                .Include(c => c.Cosmetic)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var consignment = await _consignmentService.GetByIdAsync(id.Value);
             if (consignment == null)
             {
                 return NotFound();
@@ -46,9 +44,9 @@ namespace MVC.Controllers
         }
 
         // GET: Consignments/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["CosmeticId"] = new SelectList(_context.Cosmetics, "Id", "Id");
+            ViewData["CosmeticId"] = new SelectList((await _cosmeticService.GetAllAsync()), "Id", "Id");
             return View();
         }
 
@@ -57,15 +55,14 @@ namespace MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CosmeticId,Units,ProductionDate,IsEnding,Id")] Consignment consignment)
+        public async Task<IActionResult> Create([Bind("CosmeticId,Units,ProductionDate,IsEnding")] ConsignmentCreateUpdateModel consignment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(consignment);
-                await _context.SaveChangesAsync();
+                await _consignmentService.CreateAsync(consignment);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CosmeticId"] = new SelectList(_context.Cosmetics, "Id", "Id", consignment.CosmeticId);
+            ViewData["CosmeticId"] = new SelectList((await _cosmeticService.GetAllAsync()), "Id", "Id", consignment.CosmeticId);
             return View(consignment);
         }
 
@@ -77,12 +74,12 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var consignment = await _context.Consignments.FindAsync(id);
+            var consignment = await _consignmentService.GetByIdAsync(id.Value);
             if (consignment == null)
             {
                 return NotFound();
             }
-            ViewData["CosmeticId"] = new SelectList(_context.Cosmetics, "Id", "Id", consignment.CosmeticId);
+            ViewData["CosmeticId"] = new SelectList((await _cosmeticService.GetAllAsync()), "Id", "Id", consignment.CosmeticId);
             return View(consignment);
         }
 
@@ -91,35 +88,41 @@ namespace MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CosmeticId,Units,ProductionDate,IsEnding,Id")] Consignment consignment)
+        public async Task<IActionResult> Edit(int id, [Bind("CosmeticId,Units,ProductionDate,IsEnding")] ConsignmentCreateUpdateModel consignment)
         {
-            if (id != consignment.Id)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(consignment);
-                    await _context.SaveChangesAsync();
+                    await _consignmentService.UpdateAsync(consignment, id);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ConsignmentExists(consignment.Id))
+                    if (!(await ConsignmentExists(id)))
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CosmeticId"] = new SelectList(_context.Cosmetics, "Id", "Id", consignment.CosmeticId);
-            return View(consignment);
+            ViewData["CosmeticId"] = new SelectList((await _cosmeticService.GetAllAsync()), "Id", "Id", consignment.CosmeticId);
+            return View(new ConsignmentGetModel
+            {
+                Cosmetic = new CosmeticGetModel
+                {
+                    DeliveryTime = consignment.Cosmetic.DeliveryTime,
+                    Name = consignment.Cosmetic.Name,
+                    Price = consignment.Cosmetic.Price,
+                    ShelfLife = consignment.Cosmetic.ShelfLife
+                },
+                CosmeticId = consignment.CosmeticId,
+                IsEnding = consignment.IsEnding,
+                ProductionDate = consignment.ProductionDate,
+                Units = consignment.Units
+            });
         }
 
         // GET: Consignments/Delete/5
@@ -130,9 +133,7 @@ namespace MVC.Controllers
                 return NotFound();
             }
 
-            var consignment = await _context.Consignments
-                .Include(c => c.Cosmetic)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var consignment = await _consignmentService.GetByIdAsync(id.Value);
             if (consignment == null)
             {
                 return NotFound();
@@ -146,15 +147,13 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var consignment = await _context.Consignments.FindAsync(id);
-            _context.Consignments.Remove(consignment);
-            await _context.SaveChangesAsync();
+            await _consignmentService.DeleteByIdAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ConsignmentExists(int id)
+        private async Task<bool> ConsignmentExists(int id)
         {
-            return _context.Consignments.Any(e => e.Id == id);
+            return (await _consignmentService.GetByIdAsync(id)) is not null;
         }
     }
 }

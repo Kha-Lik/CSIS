@@ -11,37 +11,38 @@ namespace API.Controllers
     [ApiController]
     public class ClientsController : Controller
     {
-        private readonly ICrudService<ClientModel> _clientService;
+        private readonly ICrudService<ClientGetModel, ClientCreateUpdateModel> _clientService;
 
-        public ClientsController(ICrudService<ClientModel> clientService)
+        public ClientsController(ICrudService<ClientGetModel, ClientCreateUpdateModel> clientService)
         {
             _clientService = clientService;
         }
 
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ClientModel>>> Index()
+        public async Task<ActionResult<IEnumerable<ClientGetModel>>> Index()
         {
             return Ok(await _clientService.GetAllAsync());
         }
         
         [HttpGet("{id}")]
-        public async Task<ActionResult<ClientModel>> GetById(int id)
+        public async Task<ActionResult<ClientGetModel>> GetById(int id)
         {
             return Ok(await _clientService.GetByIdAsync(id));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ClientModel model)
+        public async Task<IActionResult> Create(ClientCreateUpdateModel model)
         {
             await _clientService.CreateAsync(model);
             return Ok();
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(ClientModel model)
+        public async Task<IActionResult> Update(ClientCreateUpdateModel model, int id)
         {
-            if (await _clientService.GetByIdAsync(model.Id) is null) return NotFound($"No entity with id {model.Id}");
-            await _clientService.UpdateAsync(model);
+            if (await _clientService.GetByIdAsync(id) is null) return NotFound($"No entity with id {id}");
+            await _clientService.UpdateAsync(model, id);
             return Ok();
         }
 
